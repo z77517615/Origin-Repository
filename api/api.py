@@ -3,6 +3,8 @@ from flask import  Blueprint
 from flask import session
 from flask import request
 import ast
+import os
+from dotenv import load_dotenv
 from flask import session
 from flask import request
 from flask import redirect
@@ -10,16 +12,16 @@ from flask import render_template
 import mysql.connector 
 from mysql.connector import pooling
 
-dbconfig={"host":"localhost",
-          "user":'root',
-          'password':'password',
-          'database':'attractions'  }
 
+load_dotenv()
 cnxpool=mysql.connector.pooling.MySQLConnectionPool(pool_name="mypool",
                                                     pool_size=3,
-                                                    **dbconfig)
+                                                    host=os.getenv("host"),
+                                                    password=os.getenv("password"),
+                                                    user=os.getenv("user"),
+                                                    database=os.getenv("database")
+                                                    )
 
-cnxpool.set_config(**dbconfig)
 cnx1=cnxpool.get_connection()
 mycursor=cnx1.cursor()
 
