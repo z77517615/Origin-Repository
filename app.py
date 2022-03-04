@@ -25,5 +25,10 @@ def thankyou():
 	return render_template("thankyou.html")
 	
 
+<<<<<<< HEAD
 app.run(host='0.0.0.0', port=3000)
 
+=======
+
+app.run(host='0.0.0.0', port=3000)
+>>>>>>> 1a67300436ead2cd26e2e8afeb5ff04719a38240
