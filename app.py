@@ -1,6 +1,7 @@
 from flask import *
-from flask import Flask, Blueprint
 from api.api import Attraction
+from mysql.connector import pooling
+import mysql.connector
 
 
 app=Flask(__name__)
@@ -24,11 +25,5 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 	
-
-<<<<<<< HEAD
 app.run(host='0.0.0.0', port=3000)
 
-=======
-
-app.run(host='0.0.0.0', port=3000)
->>>>>>> 1a67300436ead2cd26e2e8afeb5ff04719a38240
