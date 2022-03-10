@@ -42,9 +42,7 @@ function handleIntersect(enteries){
                     createattractions()
                 }
             });       
-        }else{
-            observer.unobserve(footer)
-        }
+        };
     };
 };
 <<<<<<< HEAD
