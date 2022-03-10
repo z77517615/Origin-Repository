@@ -11,7 +11,7 @@ Attraction = Blueprint('Attraction', __name__)
 
 load_dotenv()
 cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
-                                    pool_size=3,
+                                    pool_size=10,
                                     host=os.getenv("host"),
                                     password=os.getenv("password"),
                                     user=os.getenv("user"),
