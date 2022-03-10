@@ -45,7 +45,9 @@ function handleIntersect(enteries){
                     observer.unobserve(footer)
                 }
             });       
-        };
+        }else{
+            observer.unobserve(footer)
+        }
     };
 };
 
