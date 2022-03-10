@@ -32,7 +32,7 @@ function handleIntersect(enteries){
                     observer.unobserve(footer)
                 }
             });
-        }else if((page !==null && keyword !==''){
+        }else if(keyword !==''){
             URL= `/api/attractions?page=${page}&keyword=${keyword}`
             fetch (URL).then(function(response){
                 return response.json();
@@ -45,9 +45,7 @@ function handleIntersect(enteries){
                     observer.unobserve(footer)
                 }
             });       
-        }else{
-            observer.unobserve(footer)
-        }
+        };
     };
 };
 
