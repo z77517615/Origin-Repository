@@ -10,18 +10,18 @@ body{
     grid-template-rows: 54px 1fr;
 }
 
-#search{
+.sec2 button{
     background: #448899;
     position: relative;
     border-radius: 0px 7px 7px 0px;
-    top:8px;
+    top:7px;
     left: -5px;
     border:0;
     width:46px;
     height:46px
     
 }
-#Keyinput{
+.sec2 input{
     width:400px;
     height:46px;
     margin-top:100px;
@@ -131,6 +131,8 @@ nav{
     flex:none;
     width:270px;
     margin:20px 10px 0px;
+    border: 1px solid #d8dbdd;
+    border-radius: 7px 7px 0px 0px;
 }
 
 #title{
@@ -225,9 +227,9 @@ footer{
         font-size:2rem;
     }
     .sec1{
-        grid-template-columns: 400px 1fr;
+        grid-template-columns: 350px 1fr;
     }
-    #Keyinput{
+    .sec2 input{
         width:300px;
     }
 }

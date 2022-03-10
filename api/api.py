@@ -65,23 +65,24 @@ def api_attractions():
                         "images":output
                     }  
                     results.append(result)
-                if results == []:  
-                    mycursor.close() 
-                    cnx.close()       
-                    final_result=jsonify(result)
-                    response={
+                if results == []:       
+                    data={
                         "next_page": "null",
                         "data":results
-                        }
-                    response=make_response(final_result, {"content-type":"application/json"})   
+                        }                    
+                    response=make_response(data, {"content-type":"application/json"})   
+                    mycursor.close() 
+                    cnx.close()    
                     return response
                 else:
-                    mycursor.close() 
-                    cnx.close()
-                    return {
+                    data= {
                     "next_page": next_page,
                     "data":results
                     }
+                    response=make_response(data, {"content-type":"application/json"})   
+                    mycursor.close() 
+                    cnx.close()
+                    return response
 
             else:
                 records=select(page_index)
@@ -103,24 +104,22 @@ def api_attractions():
                     }  
                     results.append(result)
                 if results == []:  
-                    mycursor.close()  
-                    cnx.close()   
-                    final_result=jsonify(result)
-                    response={
+                    data={
                         "next_page": "null",
                         "data":results
                         }      
-                    response=make_response(final_result, {"content-type":"application/json"})    
+                    response=make_response(data, {"content-type":"application/json"})  
+                    mycursor.close()  
+                    cnx.close()   
                     return response
                 else:
+                    data={
+                        "next_page": next_page,
+                        "data":results
+                        }   
+                    response=make_response(data, {"content-type":"application/json"})
                     mycursor.close() 
                     cnx.close()
-                    final_result=jsonify(result)
-                    response={
-                        "next_page": next_page,
-                    "data":results
-                        }   
-                    response=make_response(final_result, {"content-type":"application/json"})
                     return response
     
     except:
@@ -143,7 +142,7 @@ def attration(variable):
             records=mycursor.fetchone()
             str=records[9]
             output=ast.literal_eval(str)
-            result={
+            results={
                 "id": records[0],
                 "name":records[1],
                 "category":records[2],
@@ -155,13 +154,12 @@ def attration(variable):
                 "longitude": records[8],
                 "images":output
             }  
+            data={
+                      "data":results
+                    }   
+            response=make_response(data,  {"content-type":"application/json"})
             mycursor.close() 
             cnx.close()
-            final_result=jsonify(result)
-            response={
-                      "data":result
-                    }   
-            response=make_response(final_result,  {"content-type":"application/json"})
             return response
       
             
