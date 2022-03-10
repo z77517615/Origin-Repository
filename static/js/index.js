@@ -5,34 +5,33 @@ main = document.querySelector('main')
 let keyword='';
 let page=0;
 
+let options = {
+    root:null,
+    rootMargins:"0px",
+    threshold:0.9
+}
 
-document.addEventListener("DOMContentLoaded",() => {
-    let options = {
-        root:null,
-        rootMargins:"0px",
-        threshold:0.5
-    };
-
-    const observer = new IntersectionObserver(handleIntersect,options);
-    observer.observe(footer)
-});
+const observer = new IntersectionObserver(handleIntersect,options);
+observer.observe(footer)
 
 function handleIntersect(enteries){
-    if (enteries[0].isIntersecting){        
-        if (page !==null && keyword==''){
+    if (enteries[0].isIntersecting){       
+        if (page == "null" || undefined){
+            observer.unobserve(footer)
+        }else if (page !== "null" && keyword==''){
             URL="/api/attractions?page="+page;
             fetch (URL).then(function(response){
                 return response.json();
             }).then(function(result){
                 data=result.data
                 page=result["next_page"]
-                if (page !== null){
+                if (page !== "null"){
                     createattractions()
-                }else{
+                }else{                    
                     observer.unobserve(footer)
                 }
             });
-        }else if(keyword !==''){
+        }else if(page == 0 && keyword !==''){
             URL= `/api/attractions?page=${page}&keyword=${keyword}`
             fetch (URL).then(function(response){
                 return response.json();
@@ -41,48 +40,18 @@ function handleIntersect(enteries){
                 page=result["next_page"]
                 if (page !==null){
                     createattractions()
-                }else{
-                    observer.unobserve(footer)
                 }
             });       
-        };
+        }else{
+            observer.unobserve(footer)
+        }
     };
 };
-// function getData(){
-//     if (page !==null && keyword==''){
-//         URL="/api/attractions?page="+page;
-//         fetch (URL).then(function(response){
-//             return response.json();
-//         }).then(function(result){
-//             data=result.data
-//             page=result["next_page"]
-//             if (page !==null){
-//                 createattractions()
-//             }else{
-//                 observer.unobserve(footer)
-//             }            
-//         });
-//     }else if(keyword !==''){
-//         URL= `/api/attractions?page=${page}&keyword=${keyword}`
-//         fetch (URL).then(function(response){
-//             return response.json();
-//         }).then(function(result){
-//             data=result.data
-//             page=result["next_page"]
-//             if (page !==null){
-//                 createattractions()
-//             }else{
-//                 observer.unobserve(footer)
-//             }
-//         });
-//     }
-// };
-
 search.addEventListener("submit", Searching)
 function Searching(e){
     e.preventDefault()
     keyword = this.querySelector('input').value
-    page = 0
+    page = 0;
     main.innerHTML = ''
     handleIntersect()
     }
