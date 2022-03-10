@@ -48,35 +48,6 @@ function handleIntersect(enteries){
         };
     };
 };
-// function getData(){
-//     if (page !==null && keyword==''){
-//         URL="/api/attractions?page="+page;
-//         fetch (URL).then(function(response){
-//             return response.json();
-//         }).then(function(result){
-//             data=result.data
-//             page=result["next_page"]
-//             if (page !==null){
-//                 createattractions()
-//             }else{
-//                 observer.unobserve(footer)
-//             }            
-//         });
-//     }else if(keyword !==''){
-//         URL= `/api/attractions?page=${page}&keyword=${keyword}`
-//         fetch (URL).then(function(response){
-//             return response.json();
-//         }).then(function(result){
-//             data=result.data
-//             page=result["next_page"]
-//             if (page !==null){
-//                 createattractions()
-//             }else{
-//                 observer.unobserve(footer)
-//             }
-//         });
-//     }
-// };
 
 search.addEventListener("submit", Searching)
 function Searching(e){
