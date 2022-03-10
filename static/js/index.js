@@ -45,10 +45,7 @@ function handleIntersect(enteries){
         };
     };
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> 775b9f5cf090f5dc92feb5bee286fd5c24508fcd
 search.addEventListener("submit", Searching)
 function Searching(e){
     e.preventDefault()
