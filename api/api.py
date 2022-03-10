@@ -1,6 +1,7 @@
 from flask import *
 import ast
 import os
+from decouple import config
 from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import pooling
@@ -65,11 +66,14 @@ def api_attractions():
                     results.append(result)
                 if results == []:  
                     mycursor.close() 
-                    cnx.close()          
-                    return {
+                    cnx.close()       
+                    final_result=jsonify(result)
+                    response={
                         "next_page": "null",
                         "data":results
                         }
+                    response=make_response(final_result, {"content-type":"application/json"})   
+                    return response
                 else:
                     mycursor.close() 
                     cnx.close()
@@ -99,18 +103,24 @@ def api_attractions():
                     results.append(result)
                 if results == []:  
                     mycursor.close()  
-                    cnx.close()          
-                    return {
+                    cnx.close()   
+                    final_result=jsonify(result)
+                    response={
                         "next_page": "null",
                         "data":results
-                        }
+                        }      
+                    response=make_response(final_result, {"content-type":"application/json"})    
+                    return response
                 else:
                     mycursor.close() 
                     cnx.close()
-                    return {
-                    "next_page": next_page,
+                    final_result=jsonify(result)
+                    response={
+                        "next_page": next_page,
                     "data":results
-                    }
+                        }   
+                    response=make_response(final_result, {"content-type":"application/json"})
+                    return response
     
     except:
         mycursor.close() 
@@ -146,9 +156,13 @@ def attration(variable):
             }  
             mycursor.close() 
             cnx.close()
-            return {
-                    "data":result
-                    }
+            final_result=jsonify(result)
+            response={
+                      "data":result
+                    }   
+            response=make_response(final_result,  {"content-type":"application/json"})
+            return response
+      
             
     except:
         mycursor.close() 
