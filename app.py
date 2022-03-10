@@ -2,6 +2,7 @@ from flask import *
 from api.api import Attraction
 from mysql.connector import pooling
 import mysql.connector
+from decouple import config
 
 
 app=Flask(__name__)
