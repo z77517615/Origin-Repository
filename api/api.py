@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import pooling
+from decouple import config
 
 Attraction = Blueprint('Attraction', __name__)
 
