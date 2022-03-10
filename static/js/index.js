@@ -32,7 +32,7 @@ function handleIntersect(enteries){
                     observer.unobserve(footer)
                 }
             });
-        }else if(keyword !==''){
+        }else if((page !==null && keyword !==''){
             URL= `/api/attractions?page=${page}&keyword=${keyword}`
             fetch (URL).then(function(response){
                 return response.json();
