@@ -1,14 +1,14 @@
 from flask import *
-from flask import Flask, Blueprint
 from api.api import Attraction
-
+from mysql.connector import pooling
+import mysql.connector
+from decouple import config
 
 app=Flask(__name__)
-app.register_blueprint(Attraction, url_prefix='/api')
-
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config['JSON_SORT_KEYS'] = False
+app.register_blueprint(Attraction, url_prefix='/api')
 
 # Pages
 @app.route("/")
@@ -24,11 +24,5 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 	
+app.run(host='0.0.0.0', port=3000,debug=True)
 
-<<<<<<< HEAD
-app.run(host='0.0.0.0', port=3000)
-
-=======
-
-app.run(host='0.0.0.0', port=3000)
->>>>>>> 1a67300436ead2cd26e2e8afeb5ff04719a38240

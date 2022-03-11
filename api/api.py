@@ -1,50 +1,45 @@
-from flask import Flask
-from flask import  Blueprint
-from flask import session
-from flask import request
+from flask import *
 import ast
 import os
+from decouple import config
 from dotenv import load_dotenv
-from flask import session
-from flask import request
-from flask import redirect
-from flask import render_template
-import mysql.connector 
+import mysql.connector
 from mysql.connector import pooling
-
-
-load_dotenv()
-cnxpool=mysql.connector.pooling.MySQLConnectionPool(pool_name="mypool",
-                                                    pool_size=3,
-                                                    host=os.getenv("host"),
-                                                    password=os.getenv("password"),
-                                                    user=os.getenv("user"),
-                                                    database=os.getenv("database")
-                                                    )
-
-cnx1=cnxpool.get_connection()
-mycursor=cnx1.cursor()
+from decouple import config
 
 Attraction = Blueprint('Attraction', __name__)
 
-def select(page_index, keyword=""):
-    if keyword =="":
-        sql= f"select * from attraction limit 12 offset {page_index}"
-        mycursor.execute(sql)
-        records=mycursor.fetchall()
-        return records
+load_dotenv()
+cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
+                                    pool_size=10,
+                                    host=os.getenv("host"),
+                                    password=os.getenv("password"),
+                                    user=os.getenv("user"),
+                                    database=os.getenv("database"),
+                                    pool_reset_session=True
+                                             )
 
-    else:
-        sql= f"select * from attraction where name like ('%{keyword}%') limit 12 offset {page_index}"
-        mycursor.execute(sql)
-        records=mycursor.fetchall()
-        print(records)
-        return records
 
 
 @Attraction.route('/attractions')
 def api_attractions():
+    def select(page_index, keyword=""):      
+        if keyword =="":
+            sql= f"select * from attraction limit 12 offset {page_index}"
+            mycursor.execute(sql)
+            records=mycursor.fetchall()
+            return records
+
+
+        else:
+            sql= f"select * from attraction where name like ('%{keyword}%') limit 12 offset {page_index}"
+            mycursor.execute(sql)
+            records=mycursor.fetchall()
+            return records        
+    
     try:
+        cnx=cnxpool.get_connection()
+        mycursor=cnx.cursor()
         if request.args.get('page'):
             page = int(request.args.get('page'))
             page_index = page * 12
@@ -70,16 +65,24 @@ def api_attractions():
                         "images":output
                     }  
                     results.append(result)
-                if results == []:             
-                    return {
+                if results == []:       
+                    data={
                         "next_page": "null",
                         "data":results
-                        }
+                        }                    
+                    response=make_response(data, {"content-type":"application/json"})   
+                    mycursor.close() 
+                    cnx.close()    
+                    return response
                 else:
-                    return {
+                    data= {
                     "next_page": next_page,
                     "data":results
                     }
+                    response=make_response(data, {"content-type":"application/json"})   
+                    mycursor.close() 
+                    cnx.close()
+                    return response
 
             else:
                 records=select(page_index)
@@ -100,25 +103,38 @@ def api_attractions():
                         "images":output
                     }  
                     results.append(result)
-                if results == []:             
-                    return {
+                if results == []:  
+                    data={
                         "next_page": "null",
                         "data":results
-                        }
+                        }      
+                    response=make_response(data, {"content-type":"application/json"})  
+                    mycursor.close()  
+                    cnx.close()   
+                    return response
                 else:
-                    return {
-                    "next_page": next_page,
-                    "data":results
-                    }
+                    data={
+                        "next_page": next_page,
+                        "data":results
+                        }   
+                    response=make_response(data, {"content-type":"application/json"})
+                    mycursor.close() 
+                    cnx.close()
+                    return response
     
     except:
+        mycursor.close() 
+        cnx.close()
         return {
         "error": True,
         "message": "自訂的錯誤訊息"
         },500
 
+
 @Attraction.route('/attraction/<variable>')
 def attration(variable):
+    cnx=cnxpool.get_connection()
+    mycursor=cnx.cursor()
     try:
         if variable: 
             sql= f"select * from attraction where id = {variable}"
@@ -126,7 +142,7 @@ def attration(variable):
             records=mycursor.fetchone()
             str=records[9]
             output=ast.literal_eval(str)
-            result={
+            results={
                 "id": records[0],
                 "name":records[1],
                 "category":records[2],
@@ -138,13 +154,21 @@ def attration(variable):
                 "longitude": records[8],
                 "images":output
             }  
-            return {
-                    "data":result
-                    }
+            data={
+                      "data":results
+                    }   
+            response=make_response(data,  {"content-type":"application/json"})
+            mycursor.close() 
+            cnx.close()
+            return response
+      
             
     except:
+        mycursor.close() 
+        cnx.close()
         return {
         "error": True,
         "message": "伺服器內部錯誤"
         }, 500
-cnx1.close()
+
+
