@@ -11,6 +11,7 @@ body{
 }
 
 
+
 .sec2 button{
     background: #448899;
     position: relative;
@@ -211,6 +212,9 @@ footer{
     .sec1{
         grid-template-columns: 550px 1fr;
     } 
+    form{
+        padding:8px;
+    }
 
     } 
  @media (max-width:600px){
@@ -234,8 +238,9 @@ footer{
         grid-template-columns: 350px 1fr;
     }
     .sec2 input{
-        width:300px;
+        width:200px;
     }
+    
 }
 
 @media (max-width:360px){
