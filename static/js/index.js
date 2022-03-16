@@ -18,7 +18,7 @@ function handleIntersect(enteries){
     if (enteries[0].isIntersecting){       
         if (page == "null" || undefined){
             observer.unobserve(footer)
-        }else if (page !== "null" && keyword==''){
+        }else if (page !== "null" && keyword ==''){
             URL="/api/attractions?page="+page;
             fetch (URL).then(function(response){
                 return response.json();
@@ -42,6 +42,8 @@ function handleIntersect(enteries){
                     createattractions()
                 }
             });       
+        }else{                    
+            observer.unobserve(footer)
         };
     };
 };
@@ -49,11 +51,18 @@ function handleIntersect(enteries){
 search.addEventListener("submit", Searching)
 function Searching(e){
     e.preventDefault()
+    observer.unobserve(footer)
+    observer.observe(footer)
     keyword = this.querySelector('input').value
-    page = 0;
-    main.innerHTML = ''
-    handleIntersect()
-    }
+    if (keyword !==''){
+        page = 0;
+        main.innerHTML = '';
+        handleIntersect()
+    }else{
+        observer.unobserve(footer)
+        main.innerHTML = '';
+    };
+};
 
 function createattractions(){
     for(let i=0;i<data.length;i++){
@@ -61,7 +70,9 @@ function createattractions(){
         let aTag=data[i].category
         let mrt=data[i].mrt
         let name=data[i].name
-        
+        let pageid=data[i].id
+
+        let a=document.createElement("a")
         let newDiv=document.createElement("div");
         let div1=document.createElement("div");
         let images=document.createElement("img");
@@ -70,13 +81,15 @@ function createattractions(){
         let mrttitle=document.createElement("p")
         let categoryname=document.createElement("p")
 
-        document.getElementById("container").appendChild(newDiv);
+        
+        document.getElementById("container").appendChild(a);
+        a.appendChild(newDiv)
         newDiv.appendChild(div1);
         newDiv.appendChild(div2);
         div1.appendChild(images);
-        div1.appendChild(title);
+        div1.appendChild(categoryname);
         div2.appendChild(mrttitle);
-        div2.appendChild(categoryname);
+        div2.appendChild(title);
 
         images.setAttribute("id","image")
         title.setAttribute("id","title")
@@ -89,6 +102,6 @@ function createattractions(){
         mrttitle.textContent=mrt;
         categoryname.textContent=name;
         images.src=image;
+        a.href=`/attraction/${pageid}`
     };
 };  
-
