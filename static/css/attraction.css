@@ -1,0 +1,316 @@
+*{
+    margin:0;
+    padding:0;
+    List-style:none;
+    box-sizing:border-box;
+}
+
+body{
+    position:relative;
+    display:grid;
+    grid-template-rows: 54px 1fr;
+}
+
+.body{
+    position:fixed;
+    justify-content:center;
+    width:100%;
+    background-color:white;
+    top:0px;
+    z-index:9999;
+}
+
+.header{
+    display:grid;
+    margin:auto;
+    background: #FFFFFF;
+    height: 54px;
+    max-width:1200px;
+    display:grid;
+    grid-template-columns: 1fr 74px 81px;
+}
+
+.title{
+    font-size: 30px;
+    font-weight:bold;
+    color: #448899;
+    font-family:"Noto Sans";
+    line-height: 34px;
+    margin:10px 0px 10px 10px;
+    
+}
+
+
+.items{
+    font-size:16px;
+    color:#666666;
+    font-family:"Noto Sans TC";
+    width: 64px;
+}
+
+#schedule{
+    width: 74px;
+    margin:auto 0px auto -30px;
+    text-align:center;
+}
+
+#sign{
+    width: 82px;
+    margin:auto 10px;
+    text-align:center;
+    margin:auto 10px auto -30px;
+}
+
+.main_info{
+    display: flex;
+    max-width: 1200px;
+    margin:54px auto 10px;
+    padding:0 10px;
+    justify-content: space-between;
+}
+
+
+/* 圖片框 */
+.img_container{
+    position:relative;
+    width:540px;
+    height:390px;
+}    
+
+.mySlides {
+    display: none;
+    width:100%;
+    height:100%;
+}
+
+img.img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:6px;
+}
+div.arrow{
+    display:flex;
+    justify-content: space-between;
+    position:absolute;
+    top:50%;
+    height:36px;
+    width:99%;
+    align-items:center;
+}
+
+div#dot__nav{
+    display:flex;
+    justify-content: center;
+    position:absolute;
+    top:90%;
+    height:15px;
+    width:100%;
+}
+
+span.dot{
+    border:0px;
+    border-radius:50%; 
+    width:12px;
+    height:12px;
+    background:white;
+    margin:0 8px;
+    cursor: pointer;
+}
+span.active,
+span.dot:hover{
+    background:black;
+    border: 2px solid #ffffff;
+}
+
+
+div.left_arrow,div.right_arrow{
+    height:36px;
+    width:36px;
+    opacity: 0.7; 
+} 
+
+div.left_arrow:hover, div.right_arrow:hover{
+    opacity: 1;
+    cursor:pointer;
+} 
+
+div#name{
+    height:36px;
+}
+
+div#location{
+    height:36px;
+}
+
+#images{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius: 7px 7px 0px 0px;
+    
+}
+
+/* 行程表單 */
+.booking{
+    height: 380px;
+    width: 600px;
+}
+
+.booking_form>*{
+    margin:15px;
+    font-family: "Noto Sans TC";
+}
+.booking_form{
+    width: 100%;
+    padding: 10px 20px;
+    background: #e8e8e8;
+    border-radius: 5px;
+    color:#666666;
+}
+#name{
+    font-weight: bold;
+    font-size:24px;   
+}
+#location{
+    font-size:16px;   
+}
+
+.bold{
+    font-weight: bold;
+    font-size:16px;
+}
+
+.booking_form p{
+    font-size:16px;
+}
+
+.booking_form .date label{
+    font-weight: bold;
+}
+
+.booking_form .date input{
+    border: none;
+    padding: 5px 10px;
+    height: 35px;
+    width:auto;
+}
+
+.booking_form .time label:first-child{
+    font-weight: bold;
+}
+
+.booking_form .time input{
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background:#ffffff;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    transform: translateY(4px);
+
+}
+.booking_form .time input:checked{
+    background: #448899;
+}
+
+.booking_form .fee label{
+    font-weight: bold;
+}
+
+.booking_form button{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    background: #448899;
+}
+
+.separate_line{
+    width: auto;
+    max-width:1200px;
+    border: 1px solid #E8E8E8;
+    margin:auto auto;
+}
+
+/* 景點描述 */
+.info{
+    max-width:1200px;
+    margin: 20px auto auto auto;
+    padding: 10px;
+    font-family:"Noto Sans";
+    font-size:16px;
+}
+.info>*{  
+    margin-bottom: 20px;
+}
+.address_title{
+    font-weight:bold;
+}
+
+.transport_title{
+    font-weight:bold;
+}
+
+footer{    
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    background: #757575;
+    font-family: "Noto Sans TC";
+    text-align:center;
+    line-height:60px; 
+    position:fixed;
+    bottom:0px;
+    width:100%;
+}
+
+@media(max-width:1200px){
+    main{
+        width: 100%;
+    }
+
+    .main_info{
+        flex-wrap: wrap;
+        padding: 0;
+        justify-content: center;
+    }
+    .img_container{
+        width:80%;
+    }
+
+    .booking_form{
+        width: 100%;
+    }
+
+    .booking{
+        margin-top: 20px;
+        width: 80%;
+        padding: 10px;
+    }
+    .separate_line{
+        width: 90%;
+    }
+
+}
+@media(max-width:600px){
+    .img_container{
+        width: 100%;
+    }
+
+    .booking_form{
+        width: 100%;
+    }
+
+    .booking{
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+    }
+    .separate_line{
+        width: 95%;
+    }
+}

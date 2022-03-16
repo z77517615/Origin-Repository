@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
     List-style:none;
+    box-sizing:border-box;
 }
 
 body{
@@ -10,7 +11,42 @@ body{
     grid-template-rows: 54px 1fr;
 }
 
+.body{
+    position:fixed;
+    justify-content:center;
+    width:100%;
+    background-color:white;
 
+}
+
+
+.header{
+    display:grid;
+    margin:auto;
+    background: #FFFFFF;
+    height: 54px;
+    max-width:1200px;
+    display:grid;
+    grid-template-columns: 1fr 74px 81px;
+}
+
+.title{
+    font-size: 30px;
+    font-weight:bold;
+    color: #448899;
+    font-family:"Noto Sans TC";
+    line-height: 34px;
+    margin:10px 0px 10px 10px;
+    
+}
+
+
+.items{
+    font-size:16px;
+    color:#666666;
+    font-family:"Noto Sans TC";
+    width: 64px;
+}
 
 .sec2 button{
     background: #448899;
@@ -35,48 +71,17 @@ body{
     border:0;
 }
 
-.body{
-    display:grid;
-    grid-template-columns: 1fr 1200px 1fr;
-
-}
-
-.header{
-    background: #FFFFFF;
-    height: 54px;
-    display:grid;
-    grid-template-columns: 1fr 74px 81px;
-}
-
-.title{
-    font-size: 30px;
-    font-weight:bold;
-    color: #448899;
-    font-family:"Noto Sans";
-    line-height: 34px;
-    margin:10px 0px 10px 0px;
-    
-}
-
-
-.items{
-    font-size:16px;
-    color:#666666;
-    font-family:"Noto Sans TC";
-    width: 64px;
-}
-
 #schedule{
-    width: 64px;
-    margin:auto 10px auto 10px;
+    width: 74px;
+    margin:auto 0px auto -30px;
     text-align:center;
 }
 
 #sign{
-    width: 72px;
+    width: 82px;
     margin:auto 10px;
     text-align:center;
-    margin:auto 10px auto 10px;
+    margin:auto 10px auto -30px;
 }
 
 nav{
@@ -85,10 +90,12 @@ nav{
     background-size:auto auto;
     background-repeat:no-repeat;
     display:grid;
-    background-position:90%;
+    background-position:90%, 100%;
     grid-template-columns: 1fr 1200px 1fr;
     overflow:auto;  
     overflow-x: hidden; 
+    margin-top:52px;
+    
     
 }
 
@@ -126,29 +133,38 @@ nav{
     align-items:center;  
     margin:auto;
     max-width:1200px;
+    margin-top:340px;
 }
-
-#newdiv{
+#container a{
     flex:none;
     width:270px;
     margin:20px 10px 0px;
     border: 1px solid #d8dbdd;
     border-radius: 7px 7px 0px 0px;
+    text-decoration:none;
+
 }
 
+
 #title{
+    flex:none;
+    margin-right:10px;
+    font-size:16px;
+    font-family: "Noto Sans TC";
+    color: Gray;
+}
+
+
+#categoryname{
     margin-left:10px;
     font-family: "Noto Sans TC";
     color: Gray;
     font-weight:bold;
     font-size:16px;
 }
-#categoryname{
-    flex:none;
-    margin-right:10px;
-    font-size:16px;
-    font-family: "Noto Sans TC";
-    color: Gray;
+
+p.letters{
+    word-wrap:break-word;
 }
 #mrttitle{
     flex:none;
@@ -186,38 +202,45 @@ footer{
 
 }
 
+#container a:hover{
+    border: 5px solid #d8dbdd;
+    border-radius: 13px 13px 0px 0px;
+    
+}
+
 
 @media (max-width:1200px){
-	.body{
-        grid-template-columns: 1fr;
 
-    }
-    nav{
-        background-position:110%
-    }
-    #newdiv{
+    #container a{
         width:45%;
     }
 
     .sec2{
         padding-left: 10px;
     }
+
+    .sec2 input{
+        width:300px;
+    }
+
     form{
         padding:8px;
+    }
+    nav{
+        background-size: 65%, 100%;
+        background-position:right bottom;
     }
 } 
 
  @media (max-width:600px){
-	.body{
-        grid-template-columns: 1fr;
-    }
+
     nav{
-        background-position:left bottom;
-        background-size:110%
+        background-size: 70%, 100%;
+        background-position:right bottom;;
 
     }
 
-    #newdiv{
+    #container a{
         width:90%;
     }
     .sec2 input{
