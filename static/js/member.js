@@ -129,7 +129,8 @@ function sign_out(){
     }).then(res => res.json())
     .then(data => {
         if(data){
-        signin_toggle()                     
+        signin_toggle();
+        window.location.reload();                    
         }
     })
 }
