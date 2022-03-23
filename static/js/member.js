@@ -73,8 +73,9 @@ function signin(e){
     }).then(res => res.json())
     .then(data => {
     if(data["ok"] == true){
-        signout_toggle() 
-        closesign()
+        signout_toggle();
+        closesign();
+        window.location.reload();
     }else{
         message.innerText = data["message"]
         }   
