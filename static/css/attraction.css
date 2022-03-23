@@ -6,33 +6,37 @@
 }
 
 body{
-    position:relative;
+    height:100vh;
+    display:grid;
+    
 }
-
 .body{
+    z-index:1;
     position:fixed;
     justify-content:center;
     width:100%;
     background-color:white;
-    top:0px;
-    z-index:9999;
+
 }
 
+
 .header{
-    display:grid;
+    display:flex;
     margin:auto;
     background: #FFFFFF;
     height: 54px;
     max-width:1200px;
-    display:grid;
-    grid-template-columns: 1fr 74px 81px;
+}
+
+.header a{
+    cursor:pointer;
 }
 
 .title{
     font-size: 30px;
     font-weight:bold;
     color: #448899;
-    font-family:"Noto Sans";
+    font-family:"Noto Sans TC";
     line-height: 34px;
     margin:10px 0px 10px 10px;
     
@@ -48,15 +52,23 @@ body{
 
 #schedule{
     width: 74px;
-    margin:auto 0px auto -30px;
+    margin:15px 30px 10px auto;
     text-align:center;
 }
 
 #sign{
     width: 82px;
+    text-align:center;
+    margin:15px 40px 10px -30px;
+    display:block;
+}
+
+#signout{
+    width: 82px;
     margin:auto 10px;
     text-align:center;
     margin:auto 10px auto -30px;
+    display:none;
 }
 
 .main_info{
