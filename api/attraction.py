@@ -1,7 +1,6 @@
 from flask import *
 import ast
 import os
-from decouple import config
 from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import pooling
@@ -15,7 +14,7 @@ cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
                                     host=os.getenv("host"),
                                     password=os.getenv("password"),
                                     user=os.getenv("user"),
-                                    database=os.getenv("database"),
+                                    database=os.getenv("attractions"),
                                     pool_reset_session=True
                                              )
 

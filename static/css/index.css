@@ -9,7 +9,9 @@ body{
     height:100vh;
     display:grid;
     grid-template-rows: 54px 1fr;
+    
 }
+
 
 .body{
     position:fixed;
@@ -19,15 +21,16 @@ body{
 
 }
 
-
 .header{
-    display:grid;
+    display:flex;
     margin:auto;
     background: #FFFFFF;
     height: 54px;
     max-width:1200px;
-    display:grid;
-    grid-template-columns: 1fr 74px 81px;
+}
+
+.header a{
+    cursor:pointer;
 }
 
 .title{
@@ -69,19 +72,28 @@ body{
     color: #757575;
     border-radius: 7px 0px 0px 7px;
     border:0;
+    padding-left: 10px;
 }
 
 #schedule{
     width: 74px;
-    margin:auto 0px auto -30px;
+    margin:15px 30px 10px auto;
     text-align:center;
 }
 
 #sign{
     width: 82px;
+    text-align:center;
+    margin:15px 40px 10px -30px;
+    display:block;
+}
+
+#signout{
+    width: 82px;
     margin:auto 10px;
     text-align:center;
     margin:auto 10px auto -30px;
+    display:none;
 }
 
 nav{
@@ -209,6 +221,7 @@ footer{
 }
 
 
+
 @media (max-width:1200px){
 
     #container a{
@@ -243,6 +256,7 @@ footer{
     #container a{
         width:90%;
     }
+
     .sec2 input{
         width:200px;
         z-index:2;
