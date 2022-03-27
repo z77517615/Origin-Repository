@@ -70,7 +70,7 @@ function signin(e){
         headers: {
             'Content-Type': 'application/json'
             }
-    }).then(res => res.json())
+    }).then(response => response.json())
     .then(data => {
     if(data["ok"] == true){
         signout_toggle();
@@ -97,7 +97,7 @@ function signup(e){
         headers: {
             'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
+        }).then(response => response.json())
         .then(data => {
         let message = this.querySelector('.message')
         if(data["ok"] == true){
@@ -112,7 +112,7 @@ function signup(e){
 function get_userdata(){
     fetch(`/api/user`,{
         method: "GET",
-    }).then(res => res.json())
+    }).then(response => response.json())
     .then(data => {
         if(data.data == null){
             signin_toggle() 
@@ -127,7 +127,7 @@ get_userdata()
 function sign_out(){
     fetch(`/api/user`,{
         method: 'DELETE',
-    }).then(res => res.json())
+    }).then(response => response.json())
     .then(data => {
         if(data){
         signin_toggle();
