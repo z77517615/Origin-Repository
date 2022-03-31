@@ -5,9 +5,12 @@ from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import pooling
 from decouple import config
+from datetime import datetime, timedelta
+import time
 
 member = Blueprint('member', __name__)
 key = os.getenv("JWT")
+dt = datetime.now() + timedelta(seconds=30)   
 
 load_dotenv()
 cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
@@ -15,7 +18,7 @@ cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
                                     host=os.getenv("host"),
                                     password=os.getenv("password"),
                                     user=os.getenv("user"),
-                                    database=os.getenv("member"),
+                                    database=os.getenv("database"),
                                     pool_reset_session=True
                                              )
 
@@ -101,10 +104,11 @@ def signin():
             user={
                 "id":records[0],
                 "name":records[1],
-                "email":records[2]
+                "email":records[2],
+                "exp": dt
             }
             Token = jwt.encode(user, key, algorithm="HS256")
-            response.set_cookie("JWT", Token)
+            response.set_cookie("JWT", Token, expires=time.time()+6*60)
             return response
         else:
             response = make_response({
