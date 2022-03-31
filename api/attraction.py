@@ -14,7 +14,7 @@ cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
                                     host=os.getenv("host"),
                                     password=os.getenv("password"),
                                     user=os.getenv("user"),
-                                    database=os.getenv("attractions"),
+                                    database=os.getenv("database"),
                                     pool_reset_session=True
                                              )
 

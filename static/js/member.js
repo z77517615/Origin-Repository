@@ -108,6 +108,8 @@ function signup(e){
         })
     }
         
+
+
 //取得資訊
 function get_userdata(){
     fetch(`/api/user`,{
@@ -135,3 +137,57 @@ function sign_out(){
         }
     })
 }
+
+
+//按預定行程
+const schedule=document.getElementById("schedule");
+schedule.addEventListener("click", ()=>{
+    fetch("/api/user",{
+        method: 'GET',
+      }).then(response=> response.json()
+      ).then((data)=>{
+          if(data.data !==null){ 
+            window.location.href="/booking";        
+          }else{
+            towardsign_in()
+          }
+      })
+})
+
+
+const bookingForm = document.querySelector(".booking_form")
+
+//取得行程資料
+bookingForm.addEventListener('submit', booking)
+function booking(e){
+    e.preventDefault()
+    fetch(`/api/user`,{
+        method: "GET",
+    }).then(response => response.json())
+    .then(data => {
+        if(data.data !== null){
+            let booking_info={
+            "AttractionID": location.pathname.split("/")[2],
+            "date": this.querySelector('input[name="date"]').value,
+            "time" : this.querySelector('input[name="time"]').value,
+            "fee" : this.querySelector('#fee').innerText 
+            }
+            fetch(`/api/booking`,{
+                method: 'POST',
+                body: JSON.stringify(booking_info), 
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href="/booking";
+            })
+        }
+        else{
+            towardsign_in()
+        }
+    })
+}
+
+
