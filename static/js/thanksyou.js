@@ -16,6 +16,7 @@ window.addEventListener("load", ()=>{
         let cost = orderdata['price']
         let date = orderdata['trip']['date']
         let time =orderdata['trip']['time']
+        let order_number =orderdata['number']
         if (time == "morning"){
             text="早上9點到12點"
         }else{
@@ -62,6 +63,9 @@ window.addEventListener("load", ()=>{
         address_span=document.createElement("span");
         address_span.innerText=address;
         div_address.append(address_span);
+
+        number=document.getElementById("order_number");
+        number.innerText="訂單編號 : "+order_number;
 
         total_price.innerText= "新台幣 : "+ cost +"元";
     })    

@@ -157,6 +157,12 @@ h2{
     margin-top:50px;
 }
 
+#order_number{
+    font-family:"Noto Sans TC";
+    font-size: bold;
+    color:#126d9a;
+    margin-bottom:20px;
+}
 @media(max-width:1200px){
 
 .booking_main{
