@@ -10,7 +10,7 @@ import time
 
 member = Blueprint('member', __name__)
 key = os.getenv("JWT")
-dt = datetime.now() + timedelta(seconds=30)   
+dt = datetime.now() + timedelta(days=1)   
 
 load_dotenv()
 cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",

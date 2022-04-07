@@ -85,17 +85,30 @@ span{
     border-radius: 5px;
     height: 25px;
     padding-left: 5px;
+   
+}
+
+.tpfield{
+    width:180px;
+    background: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    height: 27px;
+    padding-left: 5px;
+    display:inline-block;
+    vertical-align:middle;
 }
 
 .order_info label{
     font-weight: 400;
     font-size: 16px;
-    line-height: 13px;
+    line-height: 27px;
 }
 
 .order_input{
     margin:10px auto;
 }
+
 
 .remind{
     font-weight: bold;
@@ -127,13 +140,29 @@ span{
     margin:30px auto;
     display:none;
 }
+
+.tappay-field-focus{
+    border: 2px solid  ;
+    border-color: #66afe9;
+}
+.has-error .tappay-field-focus{
+    border: 2px solid #843534;
+}
+.has-success .tappay-field-focus {
+    border: 2px solid #4fba51;
+}
+
+h2{
+    text-align: center;
+    margin-top:50px;
+}
+
 @media(max-width:1200px){
 
 .booking_main{
     padding-left: 50px;
     padding-right: 50px;
 }
-
 
 .booking_container{
     width: 100%;
@@ -142,8 +171,7 @@ span{
 div.booking{
     margin-right: auto;
     margin-left: auto;
-}
-
+    }
 }
 
 @media(max-width:600px){

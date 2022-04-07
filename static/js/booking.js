@@ -1,6 +1,7 @@
 const booking_name=document.getElementById("booking_name")
 const input_name=document.getElementById("contact_name")
 const input_email=document.getElementById("booking_email")
+const input_phone=document.getElementById("phone")
 const booking_signout = document.getElementById("booking_signout")
 const booking_delete= document.getElementById("booking_delete")
 const booking_info=document.getElementById('booking_info')
@@ -35,12 +36,13 @@ function getbookinginfo(){
     }).then(response => response.json())
     .then(data => {
         if (data.data !== null){
-            let imgURL = data['data']['attraction']['image']
-            let attr_name = data['data']['attraction']['name']
-            let address = data['data']['attraction']['address']
-            let cost = data['data']['price']
-            let date = data['data']['date']
-            let time =data['data']['time']
+            const bookingdata=data['data'] 
+            let imgURL = bookingdata['attraction']['image']
+            let attr_name = bookingdata['attraction']['name']
+            let address = bookingdata['attraction']['address']
+            let cost = bookingdata['price']
+            let date = bookingdata['date']
+            let time =bookingdata['time']
             if (time == "morning"){
                 text="早上9點到12點"
             }else{
@@ -88,11 +90,72 @@ function getbookinginfo(){
             div_address.append(address_span);
 
             total_price.innerText= "新台幣 : "+ cost +"元";
+ 
+            orderForm.addEventListener('submit', Checkorder)
+            //取得prime
+            function Checkorder(e) {
+                e.preventDefault()
 
+                // 取得 TapPay Fields 的 status
+                const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+                console.log(tappayStatus)
+
+                if (tappayStatus.canGetPrime === false) {
+                    alert('can not get prime')
+                    return
+                }
+            //Get Prime
+                TPDirect.card.getPrime(function (result) {
+                    if (result.status !== 0) {
+                        alert('get prime error ' + result.msg)
+                        return
+                    }
+                    console.log('get prime 成功，prime: ' + result.card.prime)
+            //prime傳遞後端
+                    let orderdata={
+                        "prime": result.card.prime,
+                        "order": {
+                            "price": cost,
+                            "trip": {
+                                "attraction": {
+                                "id": bookingdata['attraction']['id'],
+                                "name": attr_name,
+                                "address": address,
+                                "image": imgURL,
+                                },
+                                "date": date,
+                                "time": time,
+                            },
+                        "contact": {
+                            "name": input_name.value,
+                            "email": input_email.value,
+                            "phone": input_phone.value
+                            }
+                        }
+                    }
+                    fetch('/api/orders', {
+                        method: "POST",
+                        body: JSON.stringify(orderdata),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }).then(response => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data['error']){
+                            window.location = `/`;
+                        }
+                        else{
+                            order_number=data.data['order_number']
+                            window.location = `/thankyou?number=${order_number}`;
+                        }
+                    }) 
+                })
+            }
         }else{
             booking_information.innerHTML = '';
             no_booking.style.display="block";
-        }
+        }  
     })
 }
 
@@ -116,6 +179,92 @@ function info_delete(){
         }
 
     })
+}
+
+
+//付款
+TPDirect.setupSDK(123971, 'app_DVh7uThRN2I5iYCuLKq73U6qGkvGioDxV5GzW54kFZcpcMrqWxymdh7riXr8', 'sandbox')
+    // Display ccv field
+const submitButton=document.querySelector('button[type="submit"]')   
+const orderForm=document.querySelector('.order') 
+
+let fields= {
+        number: {
+            element: '#card-number',
+            placeholder: '**** **** **** ****'
+        },
+        expirationDate: {
+            element: '#card-expiration-date',
+            placeholder: 'MM / YY'
+        },
+        ccv: {
+            element: '#card-ccv',
+            placeholder: 'CVV'
+        }
+    }
+TPDirect.card.setup({
+    fields: fields,
+    styles: {
+        ':focus': {
+         'color': 'black'
+        },
+        // style valid state
+        '.valid': {
+            'color': 'green'
+        },
+        '.invalid': {
+            'color': 'red'
+        },
+    }
+})
+TPDirect.card.onUpdate(function (update) {
+    // update.canGetPrime === true
+    // --> you can call TPDirect.card.getPrime()
+    if (update.canGetPrime) {
+        submitButton.removeAttribute('disabled')
+    } else {
+        // Disable submit Button to get prime.
+        submitButton.setAttribute('disabled', true)
+    }
+
+    if (update.status.number === 2) {
+        setNumberFormGroupToError('.card-number-group')
+    } else if (update.status.number === 0) {
+        setNumberFormGroupToSuccess('.card-number-group')
+    } else {
+        setNumberFormGroupToNormal('.card-number-group')
+    }
+
+    if (update.status.expiry === 2) {
+        setNumberFormGroupToError('.expiration-date-group')
+    } else if (update.status.expiry === 0) {
+        setNumberFormGroupToSuccess('.expiration-date-group')
+    } else {
+        setNumberFormGroupToNormal('.expiration-date-group')
+    }
+
+    if (update.status.ccv === 2) {
+        setNumberFormGroupToError('.cvc-group')
+    } else if (update.status.ccv === 0) {
+        setNumberFormGroupToSuccess('.cvc-group')
+    } else {
+        setNumberFormGroupToNormal('.cvc-group')
+    }
+
+})
+function setNumberFormGroupToError(selector) {
+    $(selector).addClass('has-error')
+    $(selector).removeClass('has-success')
+}
+
+function setNumberFormGroupToSuccess(selector) {
+    $(selector).removeClass('has-error')
+    $(selector).addClass('has-success')
+}
+
+function setNumberFormGroupToNormal(selector) {
+    $(selector).removeClass('has-error')
+    $(selector).removeClass('has-success')
 }
 
 

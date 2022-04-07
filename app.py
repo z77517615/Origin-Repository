@@ -2,6 +2,7 @@ from flask import *
 from api.attraction import Attraction
 from api.member import member
 from api.booking import Api_booking
+from api.order import order
 from mysql.connector import pooling
 import mysql.connector
 from decouple import config
@@ -14,6 +15,7 @@ app.secret_key="123123123"
 app.register_blueprint(Attraction, url_prefix='/api')
 app.register_blueprint(member, url_prefix='/api')
 app.register_blueprint(Api_booking, url_prefix='/api')
+app.register_blueprint(order, url_prefix='/api')
 
 # Pages
 @app.route("/")

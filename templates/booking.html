@@ -51,23 +51,23 @@
                 <div class="separate_line"></div>
                 <div class="order_info">
                     <div id="order_title">信用卡付款資訊</div>
-                    <div class="order_input">
-                        <label for="credit">卡片號碼：</label>
-                        <input type="tel" id="credit" name="credit" placeholder="**** **** **** ****" required>
+                    <div class="order_input card-number-group">
+                        <label for="credit ">卡片號碼：</label>
+                        <div class="tpfield" id="card-number"></div>
                     </div>
-                    <div class="order_input">
+                    <div class="order_input expiration-date-group">
                         <label for="expiration">過期時間：</label>
-                        <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required>
+                        <div class="tpfield" id="card-expiration-date"></div>
                     </div>
-                    <div class="order_input bottom">
+                    <div class="order_input cvc-group">
                         <label for="CVV">驗證密碼：</label>
-                        <input type="text" id="CVV" name="CVV" placeholder="CVV" required>
+                        <div class="tpfield" id="card-ccv"></div>
                     </div>
                 </div>
                 <div class="separate_line"></div>
                 <div class="send_booking">
                     <div class="total_price"></div>
-                    <button type="submit">確認訂購並付款</button>
+                    <button type="submit" disabled>確認訂購並付款</button>
                 </div>
             </form>
         </div>
@@ -79,6 +79,7 @@
         </footer>
     </div>
 </body>
+<script src="https://js.tappaysdk.com/tpdirect/v5.9.0"></script>
 <script src="../static/js/member.js"></script>
 <script src="../static/js/booking.js"></script>
 </html>

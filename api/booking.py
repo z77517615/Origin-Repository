@@ -97,7 +97,7 @@ def get_booking():
                 date=records[0]
                 price=records[2]
                 time=records[1]
-                sql="SELECT name,address,images FROM Attraction WHERE id = %s"
+                sql="SELECT name,address,images FROM attraction WHERE id = %s"
                 val=(AttractionID,)
                 mycursor.execute(sql,val)
                 records=mycursor.fetchone()
