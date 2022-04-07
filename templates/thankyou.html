@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taipei Trip 台北一日遊</title>
+    <link href="../static/css/booking.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/attraction.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="body">
+        <nav class="header">
+            <a style ="text-decoration:none" class="title" href="/">台北一日遊</a>
+            <a style ="text-decoration:none" class="item" id="schedule">預定行程</a>
+            <a style ="text-decoration:none" onclick="sign_out()" class="item" id="booking_signout">登出系統</a>
+        </nav>
+    </div>   
+    <main class="booking_main">
+        <div class="booking_name">您好，<span id="booking_name"></span>已預定的行程如下:</div>
+        <div id="order_number"></div>
+        <div class="booking_information">
+            <div class="bookinginfo">
+                <div class="booking_container">
+                    <div class="booking_img_container">
+                        <img id="booking_img"></img>
+                    </div>
+                    <div id="booking_info"></div>
+                </div>
+            </div>
+            <div class="separate_line"></div>  
+            <h2><b>感謝您的訂購，預祝旅程愉快</b></h2>
+    </main>
+
+
+    <div class="footerspace">
+        <footer>
+            <p>COPYRIGHT © 2021 台北一日遊</p>
+        </footer>
+    </div>
+</body>
+
+<script src="../static/js/thanksyou.js"></script>
+<script src="../static/js/booking.js"></script>
+<script src="../static/js/member.js"></script>
+</html>
