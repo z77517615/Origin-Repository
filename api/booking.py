@@ -64,11 +64,13 @@ def booking():
             }
             return jsonify(data),403
     except:
+        cnx.rollback()
         data = {
             "error": True,
             "message": "伺服器內部錯誤"
         }
         return jsonify(data), 500
+
     finally:
         mycursor.close() 
         cnx.close()   
@@ -119,6 +121,7 @@ def get_booking():
                     }
                 return jsonify(data),200
     except:
+        cnx.rollback()
         data={
         "error": True,
         "message": "未登入系統，拒絕存取"

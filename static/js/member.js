@@ -1,193 +1,187 @@
-const sign = document.getElementById("sign")
-const signout = document.getElementById("signout")
-const background_color= document.querySelector(".background_color")
-const signin_member= document.querySelector(".signin_member")
-const signup_member= document.querySelector(".signup_member")
-const signinForm = document.querySelector("#signin")
-const signupForm = document.querySelector("#signup")
-const message = document.querySelector('.message')
-
-
+const sign = document.getElementById("sign");
+const signout = document.getElementById("signout");
+const background_color = document.querySelector(".background_color");
+const signin_member = document.querySelector(".signin_member");
+const signup_member = document.querySelector(".signup_member");
+const signinForm = document.querySelector("#signin");
+const signupForm = document.querySelector("#signup");
+const message = document.querySelector(".message");
 
 //切換選單出現
-function showsign_in(){
-    background_color.style.display="block";
-    signin_member.style.display="block";
+function showsign_in() {
+  background_color.style.display = "block";
+  signin_member.style.display = "block";
 }
 
-function closesign_in(){
-    background_color.style.display="none";
-    signin_member.style.display="none";
+function closesign_in() {
+  background_color.style.display = "none";
+  signin_member.style.display = "none";
 }
 
-function closesign_up(){
-    background_color.style.display="none";
-    signup_member.style.display="none";
+function closesign_up() {
+  background_color.style.display = "none";
+  signup_member.style.display = "none";
 }
 
-function towardsign_up(){
-    signup_member.style.display="block";
-    background_color.style.display="block";
-    signin_member.style.display="none";
+function towardsign_up() {
+  signup_member.style.display = "block";
+  background_color.style.display = "block";
+  signin_member.style.display = "none";
 }
 
-function towardsign_in(){
-    signup_member.style.display="none";
-    background_color.style.display="block";
-    signin_member.style.display="block";
+function towardsign_in() {
+  signup_member.style.display = "none";
+  background_color.style.display = "block";
+  signin_member.style.display = "block";
 }
 
-function closesign(){
-    signup_member.style.display="none";
-    background_color.style.display="none";
-    signin_member.style.display="none";
+function closesign() {
+  signup_member.style.display = "none";
+  background_color.style.display = "none";
+  signin_member.style.display = "none";
 }
 
-function signout_toggle(){
-    sign.style.display="none";
-    signout.style.display="block";
+function signout_toggle() {
+  sign.style.display = "none";
+  signout.style.display = "block";
 }
 
-function signin_toggle(){
-    sign.style.display="block";
-    signout.style.display="none";
+function signin_toggle() {
+  sign.style.display = "block";
+  signout.style.display = "none";
 }
-
-
-
 
 //登入
-signinForm.addEventListener('submit', signin)
-function signin(e){
-    e.preventDefault()
-    let data = {
-        "email" : this.querySelector('input[name="email"]').value,
-        "password" : this.querySelector('input[name="password"]').value 
-    }
-    fetch(`/api/user`, {
-        method: 'PATCH',
-        body: JSON.stringify(data), 
-        headers: {
-            'Content-Type': 'application/json'
-            }
-    }).then(response => response.json())
-    .then(data => {
-    if(data["ok"] == true){
+signinForm.addEventListener("submit", signin);
+function signin(e) {
+  e.preventDefault();
+  let data = {
+    email: this.querySelector('input[name="email"]').value,
+    password: this.querySelector('input[name="password"]').value,
+  };
+  fetch(`/api/user`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data["ok"] == true) {
         signout_toggle();
         closesign();
         window.location.reload();
-    }else{
-        message.innerText = data["message"]
-        }   
-    })
+      } else {
+        message.innerText = data["message"];
+      }
+    });
 }
 
 //註冊
-signupForm.addEventListener('submit', signup)
-function signup(e){
-    e.preventDefault()
-    let data = {
-        "name": this.querySelector('input[name="name"]').value,
-        "email" : this.querySelector('input[name="email"]').value,
-        "password" : this.querySelector('input[name="password"]').value 
-    }
-    fetch(`/api/user`, {
-        method: 'POST',
-        body: JSON.stringify(data), 
-        headers: {
-            'Content-Type': 'application/json'
-            }
-        }).then(response => response.json())
-        .then(data => {
-        let message = this.querySelector('.message')
-        if(data["ok"] == true){
-            message.innerText = "註冊成功"
-        }else{
-            message.innerText = data["message"]
-            }   
-        })
-    }
-        
-
+signupForm.addEventListener("submit", signup);
+function signup(e) {
+  e.preventDefault();
+  let data = {
+    name: this.querySelector('input[name="name"]').value,
+    email: this.querySelector('input[name="email"]').value,
+    password: this.querySelector('input[name="password"]').value,
+  };
+  fetch(`/api/user`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      let message = this.querySelector(".message");
+      if (data["ok"] == true) {
+        message.innerText = "註冊成功";
+      } else {
+        message.innerText = data["message"];
+      }
+    });
+}
 
 //取得資訊
-function get_userdata(){
-    fetch(`/api/user`,{
-        method: "GET",
-    }).then(response => response.json())
-    .then(data => {
-        if(data.data == null){
-            signin_toggle() 
-        }else{
-            signout_toggle()
-        }
-    })
+function get_userdata() {
+  fetch(`/api/user`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.data == null) {
+        signin_toggle();
+      } else {
+        signout_toggle();
+      }
+    });
 }
-get_userdata()
+get_userdata();
 
 //登出
-function sign_out(){
-    fetch(`/api/user`,{
-        method: 'DELETE',
-    }).then(response => response.json())
-    .then(data => {
-        if(data){
+function sign_out() {
+  fetch(`/api/user`, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
         signin_toggle();
-        window.location.reload();                    
-        }
-    })
+        window.location.reload();
+      }
+    });
 }
-
 
 //按預定行程
-const schedule=document.getElementById("schedule");
-schedule.addEventListener("click", ()=>{
-    fetch("/api/user",{
-        method: 'GET',
-      }).then(response=> response.json()
-      ).then((data)=>{
-          if(data.data !==null){ 
-            window.location.href="/booking";        
-          }else{
-            towardsign_in()
-          }
-      })
-})
+const schedule = document.getElementById("schedule");
+schedule.addEventListener("click", () => {
+  fetch("/api/user", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.data !== null) {
+        window.location.href = "/booking";
+      } else {
+        towardsign_in();
+      }
+    });
+});
 
-
-const bookingForm = document.querySelector(".booking_form")
+const bookingForm = document.querySelector(".booking_form");
 
 //取得行程資料
-bookingForm.addEventListener('submit', booking)
-function booking(e){
-    e.preventDefault()
-    fetch(`/api/user`,{
-        method: "GET",
-    }).then(response => response.json())
-    .then(data => {
-        if(data.data !== null){
-            let booking_info={
-            "AttractionID": location.pathname.split("/")[2],
-            "date": this.querySelector('input[name="date"]').value,
-            "time" : this.querySelector('input[name="time"]').value,
-            "fee" : this.querySelector('#fee').innerText 
-            }
-            fetch(`/api/booking`,{
-                method: 'POST',
-                body: JSON.stringify(booking_info), 
-                headers: {
-                'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href="/booking";
-            })
-        }
-        else{
-            towardsign_in()
-        }
-    })
+bookingForm.addEventListener("submit", booking);
+function booking(e) {
+  e.preventDefault();
+  fetch(`/api/user`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.data !== null) {
+        let booking_info = {
+          AttractionID: location.pathname.split("/")[2],
+          date: this.querySelector('input[name="date"]').value,
+          time: this.querySelector('input[name="time"]').value,
+          fee: this.querySelector("#fee").innerText,
+        };
+        fetch(`/api/booking`, {
+          method: "POST",
+          body: JSON.stringify(booking_info),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            window.location.href = "/booking";
+          });
+      } else {
+        towardsign_in();
+      }
+    });
 }
-
-

@@ -71,6 +71,7 @@ def signup():
                  },400)
             return response
     except:
+        cnx.rollback()
         response=make_response({
             "error": True, 
             "message": "伺服器內部錯誤"
@@ -117,6 +118,7 @@ def signin():
             },400)
             return response
     except:
+        cnx.rollback()
         response = make_response({
             "error": True,
             "message": "伺服器內部錯誤"
