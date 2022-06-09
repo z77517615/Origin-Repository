@@ -1,266 +1,246 @@
-*{
-    margin:0;
-    padding:0;
-    List-style:none;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
 }
 
-body{
-    height:100vh;
-    display:grid;
-    grid-template-rows: 54px 1fr;
-    
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 54px 1fr;
 }
 
-
-.body{
-    position:fixed;
-    justify-content:center;
-    width:100%;
-    background-color:white;
-
+.body {
+  position: fixed;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
 }
 
-.header{
-    display:flex;
-    margin:auto;
-    background: #FFFFFF;
-    height: 54px;
-    max-width:1200px;
+.header {
+  display: flex;
+  margin: auto;
+  background: #ffffff;
+  height: 54px;
+  max-width: 1200px;
 }
 
-.header a{
-    cursor:pointer;
+.header a {
+  cursor: pointer;
 }
 
-.title{
-    font-size: 30px;
-    font-weight:bold;
-    color: #448899;
-    font-family:"Noto Sans TC";
-    line-height: 34px;
-    margin:10px 0px 10px 10px;
-    
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #448899;
+  font-family: "Noto Sans TC";
+  line-height: 34px;
+  margin: 10px 0px 10px 10px;
 }
 
-
-.items{
-    font-size:16px;
-    color:#666666;
-    font-family:"Noto Sans TC";
-    width: 64px;
+.items {
+  font-size: 16px;
+  color: #666666;
+  font-family: "Noto Sans TC";
+  width: 64px;
 }
 
-.sec2 button{
-    background: #448899;
-    position: relative;
-    border-radius: 0px 7px 7px 0px;
-    top:7px;
-    left: -5px;
-    border:0;
-    width:46px;
-    height:46px
-    
+.sec2 button {
+  background: #448899;
+  position: relative;
+  border-radius: 0px 7px 7px 0px;
+  top: 7px;
+  left: -5px;
+  border: 0;
+  width: 46px;
+  height: 46px;
 }
-.sec2 input{
-    width:400px;
-    height:46px;
-    margin-top:100px;
-    font-family: "Noto Sans TC";
-    font-size:16px;
-    font-weight: bold;
-    color: #757575;
-    border-radius: 7px 0px 0px 7px;
-    border:0;
+.sec2 input {
+  width: 400px;
+  height: 46px;
+  margin-top: 100px;
+  font-family: "Noto Sans TC";
+  font-size: 16px;
+  font-weight: bold;
+  color: #757575;
+  border-radius: 7px 0px 0px 7px;
+  border: 0;
+  padding-left: 10px;
+}
+
+#schedule {
+  width: 74px;
+  margin: 15px 30px 10px auto;
+  text-align: center;
+}
+
+#sign {
+  width: 82px;
+  text-align: center;
+  margin: 15px 40px 10px -30px;
+  display: block;
+}
+
+#signout {
+  width: 82px;
+  margin: auto 10px;
+  text-align: center;
+  margin: auto 10px auto -30px;
+  display: none;
+}
+
+nav {
+  height: 320px;
+  background: url("/static/header.png"),
+    linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
+  background-size: auto auto;
+  background-repeat: no-repeat;
+  display: grid;
+  background-position: 90%, 100%;
+  grid-template-columns: 1fr 1200px 1fr;
+  overflow: auto;
+  overflow-x: hidden;
+  margin-top: 52px;
+}
+
+.sec2-1 {
+  position: relative;
+  left: 0px;
+  top: 80px;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 24px;
+  color: #f8f8f8;
+  text-shadow: 0px 0px 30px #aabbcc;
+  padding: 5px;
+}
+
+.sec2-2 {
+  position: relative;
+  left: 0px;
+  top: 80px;
+  padding: 8px;
+  font-family: "Noto Sans TC";
+  color: #f8f8f8;
+  font-size: 16px;
+  line-height: 13px;
+}
+
+#container {
+  display: flex;
+  flex: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 1200px;
+  margin-top: 340px;
+}
+#container a {
+  flex: none;
+  width: 270px;
+  margin: 20px 10px 0px;
+  border: 1px solid #d8dbdd;
+  border-radius: 7px 7px 0px 0px;
+  text-decoration: none;
+}
+
+#title {
+  flex: none;
+  margin-right: 10px;
+  font-size: 16px;
+  font-family: "Noto Sans TC";
+  color: Gray;
+}
+
+#categoryname {
+  margin-left: 10px;
+  font-family: "Noto Sans TC";
+  color: Gray;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+p.letters {
+  word-wrap: break-word;
+}
+#mrttitle {
+  flex: none;
+  margin-left: 10px;
+  font-size: 16px;
+  font-family: "Noto Sans TC";
+  color: Gray;
+}
+
+#div2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px 0px;
+}
+
+#image {
+  flex: none;
+  font-weight: bold;
+  width: 100%;
+  background-color: #f0f8ff;
+  text-align: center;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 7px 7px 0px 0px;
+}
+
+footer {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  background: #757575;
+  font-family: "Noto Sans TC";
+  text-align: center;
+  line-height: 60px;
+}
+
+#container a:hover {
+  border: 5px solid #d8dbdd;
+  border-radius: 13px 13px 0px 0px;
+}
+
+@media (max-width: 1200px) {
+  #container a {
+    width: 45%;
+  }
+
+  .sec2 {
     padding-left: 10px;
+  }
+
+  .sec2 input {
+    width: 300px;
+  }
+
+  form {
+    padding: 8px;
+  }
+  nav {
+    background-size: 65%, 100%;
+    background-position: right bottom;
+  }
 }
 
-#schedule{
-    width: 74px;
-    margin:15px 30px 10px auto;
-    text-align:center;
+@media (max-width: 600px) {
+  nav {
+    background-size: 70%, 100%;
+    background-position: right bottom;
+  }
+
+  #container a {
+    width: 90%;
+  }
+
+  .sec2 input {
+    width: 200px;
+    z-index: 2;
+  }
 }
-
-#sign{
-    width: 82px;
-    text-align:center;
-    margin:15px 40px 10px -30px;
-    display:block;
-}
-
-#signout{
-    width: 82px;
-    margin:auto 10px;
-    text-align:center;
-    margin:auto 10px auto -30px;
-    display:none;
-}
-
-nav{
-    height:320px;
-    background: url("/static/header.png"),linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
-    background-size:auto auto;
-    background-repeat:no-repeat;
-    display:grid;
-    background-position:90%, 100%;
-    grid-template-columns: 1fr 1200px 1fr;
-    overflow:auto;  
-    overflow-x: hidden; 
-    margin-top:52px;
-    
-    
-}
-
-.sec2-1{
-    position: relative;
-    left: 0px;
-    top: 80px;
-    font-family: "Noto Sans TC";
-    font-style: normal;
-    font-weight: bold;
-    font-size: 28px;
-    line-height: 24px;
-    color: #F8F8F8;
-    text-shadow: 0px 0px 30px #AABBCC;
-    padding:5px;
-}
-
-.sec2-2{
-    position: relative;
-    left: 0px;
-    top: 80px;
-    padding:8px;
-    font-family: "Noto Sans TC";
-    color: #F8F8F8;
-    font-size: 16px;
-    line-height: 13px;
-
-}
-
-#container{
-    display:flex;
-    flex:auto;
-    flex-wrap:wrap;  
-    justify-content:center;  
-    align-items:center;  
-    margin:auto;
-    max-width:1200px;
-    margin-top:340px;
-}
-#container a{
-    flex:none;
-    width:270px;
-    margin:20px 10px 0px;
-    border: 1px solid #d8dbdd;
-    border-radius: 7px 7px 0px 0px;
-    text-decoration:none;
-
-}
-
-
-#title{
-    flex:none;
-    margin-right:10px;
-    font-size:16px;
-    font-family: "Noto Sans TC";
-    color: Gray;
-}
-
-
-#categoryname{
-    margin-left:10px;
-    font-family: "Noto Sans TC";
-    color: Gray;
-    font-weight:bold;
-    font-size:16px;
-}
-
-p.letters{
-    word-wrap:break-word;
-}
-#mrttitle{
-    flex:none;
-    margin-left:10px;
-    font-size:16px;
-    font-family: "Noto Sans TC";
-    color: Gray;
-}
-
-#div2{
-    display:flex;
-    justify-content:space-between;
-    margin:10px 0px 0px;
-}
-
-#image{
-    flex:none; 
-    font-weight:bold;
-    width:100%;
-    background-color:#f0f8ff;
-    text-align: center;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    border-radius: 7px 7px 0px 0px;
-}
-
-footer{    
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    background: #757575;
-    font-family: "Noto Sans TC";
-    text-align:center;
-    line-height:60px; 
-
-}
-
-#container a:hover{
-    border: 5px solid #d8dbdd;
-    border-radius: 13px 13px 0px 0px;
-    
-}
-
-
-
-@media (max-width:1200px){
-
-    #container a{
-        width:45%;
-    }
-
-    .sec2{
-        padding-left: 10px;
-    }
-
-    .sec2 input{
-        width:300px;
-    }
-
-    form{
-        padding:8px;
-    }
-    nav{
-        background-size: 65%, 100%;
-        background-position:right bottom;
-    }
-} 
-
- @media (max-width:600px){
-
-    nav{
-        background-size: 70%, 100%;
-        background-position:right bottom;;
-
-    }
-
-    #container a{
-        width:90%;
-    }
-
-    .sec2 input{
-        width:200px;
-        z-index:2;
-    }
-
-}
-    

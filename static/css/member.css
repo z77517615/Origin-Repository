@@ -1,114 +1,118 @@
 /* 會員登入/註冊*/
-.member{
-    z-index:2;
-    position:fixed;
-    width:100%;
-    margin-top: 52px;
+.member {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  margin-top: 52px;
 }
-.background_color{
-    position:fixed;
-    top:0px;
-    height:100%;
-    width:100%;
-    background-color: #666666;
-    opacity: 0.25;
-    display:none;
-}
-
-.signin_member{
-    font-family:"Noto Sans TC";
-    color:#666666;
-    border-radius: 5px;
-    background: #FFFFFF;
-    width:340px;
-    height:auto;
-    position:relative;
-    margin:20px auto;
-    display:flex;
-    flex-direction:column;
-    animation: move 1s; 
-    display: none;
+.background_color {
+  position: fixed;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: #666666;
+  opacity: 0.25;
+  display: none;
 }
 
-.member_title{
-    display:flex;
-    justify-content: center;
-    margin:10px;
-    font-size: 24px;
-    padding-top: 10px;
+.signin_member {
+  font-family: "Noto Sans TC";
+  color: #666666;
+  border-radius: 5px;
+  background: #ffffff;
+  width: 340px;
+  height: auto;
+  position: relative;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  animation: move 1s;
+  display: none;
 }
 
-#close{
-    top:10px;
-    right:15px;
-    position:absolute;
-    cursor: pointer;
-    color: #666666;
-    opacity: 0.45;
+.member_title {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  font-size: 24px;
+  padding-top: 10px;
 }
 
-.member form{
-    display:flex;
-    flex-direction:column;
-    align-items: center;
+#close {
+  top: 10px;
+  right: 15px;
+  position: absolute;
+  cursor: pointer;
+  color: #666666;
+  opacity: 0.45;
 }
 
-.member form>input {
-    width: 90%;
-    height: 47px;
-    margin:8px;
-    border: 1px solid #CCCCCC;
-    box-sizing: border-box;
-    border-radius: 5px;
-    padding-left: 10px;
+.member form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.member form>button{
-    width: 90%;
-    height: 53px;
-    margin:8px;
-    background: #448899;
-    border-radius: 5px;
-    font-size: 19px;
-    color: #FFFFFF;
-    border-style: none;
+.member form > input {
+  width: 90%;
+  height: 47px;
+  margin: 8px;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding-left: 10px;
 }
 
-.member form>p {
-    font-size: 16px;
-    color: #666666;
-    margin-bottom:5px;
+.member form > button {
+  width: 90%;
+  height: 53px;
+  margin: 8px;
+  background: #448899;
+  border-radius: 5px;
+  font-size: 19px;
+  color: #ffffff;
+  border-style: none;
+}
+
+.member form > p {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 5px;
 }
 
 .signup_member {
-    font-family:"Noto Sans TC";
-    color:#666666;
-    border-radius: 5px;
-    background: #FFFFFF;
-    width:340px;
-    height:auto;
-    position:relative;
-    margin:20px auto;
-    display:flex;
-    flex-direction:column;
-    display:none;
+  font-family: "Noto Sans TC";
+  color: #666666;
+  border-radius: 5px;
+  background: #ffffff;
+  width: 340px;
+  height: auto;
+  position: relative;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  display: none;
 }
 
-span#towardsign_in{
-    cursor: pointer;
-} 
-span#towardsign_up{
-    cursor: pointer;
+span#towardsign_in {
+  cursor: pointer;
+}
+span#towardsign_up {
+  cursor: pointer;
 }
 
-span#towardsign_up:hover{
-    color:#448899;
+span#towardsign_up:hover {
+  color: #448899;
 }
-span#towardsign_in:hover{
-    color:#448899;
+span#towardsign_in:hover {
+  color: #448899;
 }
 
-@keyframes move{
-    0%{transform:translateY(-50px); }
-    100%{transform:translateY(0px);}
+@keyframes move {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }

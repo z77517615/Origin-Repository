@@ -90,6 +90,7 @@ def pay_order():
                    }
                 return jsonify (data), 400
         except:
+            cnx.rollback()
             data ={
                 "error":True, 
                 "message":"伺服器內部錯誤"
@@ -158,6 +159,9 @@ def get_order(order_number):
                 "message": "未登入系統，拒絕存取"
                 }
             return jsonify(data),400
+    except:
+        cnx.rollback()
+        
     finally:
         mycursor.close() 
         cnx.close() 

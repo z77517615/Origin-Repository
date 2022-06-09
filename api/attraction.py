@@ -79,8 +79,6 @@ def api_attractions():
                     "data":results
                     }
                     response=make_response(data, {"content-type":"application/json"})   
-                    mycursor.close() 
-                    cnx.close()
                     return response
 
             else:
@@ -107,9 +105,7 @@ def api_attractions():
                         "next_page": "null",
                         "data":results
                         }      
-                    response=make_response(data, {"content-type":"application/json"})  
-                    mycursor.close()  
-                    cnx.close()   
+                    response=make_response(data, {"content-type":"application/json"})   
                     return response
                 else:
                     data={
@@ -117,17 +113,18 @@ def api_attractions():
                         "data":results
                         }   
                     response=make_response(data, {"content-type":"application/json"})
-                    mycursor.close() 
-                    cnx.close()
                     return response
     
     except:
-        mycursor.close() 
-        cnx.close()
+        cnx.rollback()
         return {
         "error": True,
         "message": "自訂的錯誤訊息"
         },500
+    
+    finally:
+        mycursor.close() 
+        cnx.close()
 
 
 @Attraction.route('/attraction/<variable>')
@@ -157,17 +154,19 @@ def attration(variable):
                       "data":results
                     }   
             response=make_response(data,  {"content-type":"application/json"})
-            mycursor.close() 
-            cnx.close()
             return response
       
             
     except:
-        mycursor.close() 
-        cnx.close()
+        cnx.rollback()
         return {
         "error": True,
         "message": "伺服器內部錯誤"
         }, 500
+
+    finally:
+        mycursor.close() 
+        cnx.close()
+
 
 
