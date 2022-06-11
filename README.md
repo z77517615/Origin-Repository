@@ -8,9 +8,9 @@
 - 測試帳號：test@gmail.com
 - 測試密碼：test111
 
-Credit Card : 4242-4242-4242-4242</br>
-Date : 01/23</br>
-CVV : 123
+- Credit Card : 4242-4242-4242-4242
+- Date : 01/23
+- CVV : 123
 
 亦可在註冊欄位建立自己的帳號使用網站功能
 
