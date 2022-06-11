@@ -14,7 +14,6 @@ CVV : 123
 
 亦可在註冊欄位建立自己的帳號使用網站功能
 
-
 <br/>
 
 ## 使用技術
@@ -25,3 +24,26 @@ CVV : 123
 * 結合TapPay第三方金流服務，開發購物車系統。
 * 專案部署於AWS EC2。
 
+<br/>
+
+## 功能介紹
+
+### 首頁利用IntersectionObserver一次列出12筆景點資料。
+![螢幕擷取畫面 2022-06-11 145750](https://user-images.githubusercontent.com/94062367/173177566-0e4f9d8e-a325-4ca1-b1fe-71c38770b1f9.png)
+
+<br/>
+
+### 點選景點進入介紹頁面，輪播(Carousel)圖切換景點照片。
+![螢幕擷取畫面 2022-06-11 151219](https://user-images.githubusercontent.com/94062367/173177701-3e49d496-d63f-45ca-92e0-6f5c2915e001.png)
+
+<br/>
+
+### 預定行程連接會員系統，會員可導入付款頁面，非會員導入登入頁面。
+![螢幕擷取畫面 2022-06-11 151610](https://user-images.githubusercontent.com/94062367/173177765-0bcde147-e48c-4683-aee0-76d11715a93e.png)
+
+<br/>
+
+### 會員訂單系統。
+
+
+<br/>
