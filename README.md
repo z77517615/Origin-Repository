@@ -44,6 +44,10 @@ CVV : 123
 <br/>
 
 ### 會員訂單系統。
-
+![螢幕擷取畫面 2022-06-11 152445](https://user-images.githubusercontent.com/94062367/173178221-d3a69750-c448-4cd4-a29b-debed0e4cb37.png)
 
 <br/>
+
+### 付款確認畫面。
+![螢幕擷取畫面 2022-06-11 152504](https://user-images.githubusercontent.com/94062367/173178251-9acba9c5-2671-4672-beed-eafc5277f4c8.png)
+
