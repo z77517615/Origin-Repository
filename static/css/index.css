@@ -203,7 +203,7 @@ footer {
 }
 
 #container a:hover {
-  border: 5px solid #d8dbdd;
+  outline: 5px solid #d8dbdd;
   border-radius: 13px 13px 0px 0px;
 }
 
