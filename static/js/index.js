@@ -1,59 +1,48 @@
-footer = document.querySelector("footer");
-container = document.querySelector("#container");
-search = document.querySelector(".sec2 form");
-main = document.querySelector("main");
+const footer = document.querySelector("footer");
+const container = document.querySelector("#container");
+const search = document.querySelector(".sec2 form");
+const main = document.querySelector("main");
 let keyword = "";
 let page = 0;
 
-let options = {
+const options = {
   root: null,
-  rootMargins: "0px",
+  rootMargin: "0px",
   threshold: 0.9,
 };
 
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(footer);
 
-function handleIntersect(enteries) {
-  if (enteries[0].isIntersecting) {
-    if (page == "null" || undefined) {
+function handleIntersect(entries) {
+  if (entries[0].isIntersecting) {
+    if (page === null || page === undefined) {
       observer.unobserve(footer);
-    } else if (page !== "null" && keyword == "") {
-      URL = "/api/attractions?page=" + page;
-      fetch(URL)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (result) {
-          data = result.data;
-          page = result["next_page"];
-          if (page !== "null") {
-            createattractions();
-          } else {
-            observer.unobserve(footer);
-          }
-        });
-    } else if (page == 0 && keyword !== "") {
-      URL = `/api/attractions?page=${page}&keyword=${keyword}`;
-      fetch(URL)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (result) {
-          data = result.data;
-          page = result["next_page"];
-          if (page !== null) {
-            createattractions();
-          }
-        });
+    } else if (page !== null && keyword === "") {
+      fetchAttractions(`/api/attractions?page=${page}`);
+    } else if (page === 0 && keyword !== "") {
+      fetchAttractions(`/api/attractions?page=${page}&keyword=${keyword}`);
     } else {
       observer.unobserve(footer);
     }
   }
 }
 
-search.addEventListener("submit", Searching);
-function Searching(e) {
+function fetchAttractions(url) {
+  fetch(url)
+    .then(response => response.json())
+    .then(result => {
+      const data = result.data;
+      page = result.next_page;
+      if (page !== null) {
+        createAttractions(data);
+      } else {
+        observer.unobserve(footer);
+      }
+    });
+}
+
+search.addEventListener("submit", function (e) {
   e.preventDefault();
   observer.unobserve(footer);
   observer.observe(footer);
@@ -61,50 +50,46 @@ function Searching(e) {
   if (keyword !== "") {
     page = 0;
     main.innerHTML = "";
-    handleIntersect();
+    handleIntersect([{ isIntersecting: true }]);
   } else {
     observer.unobserve(footer);
     main.innerHTML = "";
   }
-}
+});
 
-function createattractions() {
-  for (let i = 0; i < data.length; i++) {
-    let image = data[i].images[0];
-    let aTag = data[i].category;
-    let mrt = data[i].mrt;
-    let name = data[i].name;
-    let pageid = data[i].id;
+function createAttractions(data) {
+  data.forEach(attraction => {
+    const { images, category, mrt, name, id } = attraction;
 
-    let a = document.createElement("a");
-    let newDiv = document.createElement("div");
-    let div1 = document.createElement("div");
-    let images = document.createElement("img");
-    let title = document.createElement("p");
-    let div2 = document.createElement("div");
-    let mrttitle = document.createElement("p");
-    let categoryname = document.createElement("p");
+    const a = document.createElement("a");
+    const newDiv = document.createElement("div");
+    const div1 = document.createElement("div");
+    const img = document.createElement("img");
+    const title = document.createElement("p");
+    const div2 = document.createElement("div");
+    const mrtTitle = document.createElement("p");
+    const categoryName = document.createElement("p");
 
-    document.getElementById("container").appendChild(a);
+    container.appendChild(a);
     a.appendChild(newDiv);
     newDiv.appendChild(div1);
     newDiv.appendChild(div2);
-    div1.appendChild(images);
-    div1.appendChild(categoryname);
-    div2.appendChild(mrttitle);
+    div1.appendChild(img);
+    div1.appendChild(categoryName);
+    div2.appendChild(mrtTitle);
     div2.appendChild(title);
 
-    images.setAttribute("id", "image");
-    title.setAttribute("id", "title");
-    mrttitle.setAttribute("id", "mrttitle");
-    categoryname.setAttribute("id", "categoryname");
-    newDiv.setAttribute("id", "newdiv");
-    div2.setAttribute("id", "div2");
+    img.id = "image";
+    title.id = "title";
+    mrtTitle.id = "mrttitle";
+    categoryName.id = "categoryname";
+    newDiv.id = "newdiv";
+    div2.id = "div2";
 
-    title.textContent = aTag;
-    mrttitle.textContent = mrt;
-    categoryname.textContent = name;
-    images.src = image;
-    a.href = `/attraction/${pageid}`;
-  }
+    title.textContent = category;
+    mrtTitle.textContent = mrt;
+    categoryName.textContent = name;
+    img.src = images[0];
+    a.href = `/attraction/${id}`;
+  });
 }
