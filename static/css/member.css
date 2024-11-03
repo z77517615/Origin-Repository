@@ -1,47 +1,47 @@
 /* 會員登入/註冊*/
 .member {
-  z-index: 2;
   position: fixed;
+  z-index: 2;
   width: 100%;
   margin-top: 52px;
 }
 .background_color {
   position: fixed;
   top: 0px;
-  height: 100%;
   width: 100%;
+  height: 100%;
   background-color: #666666;
   opacity: 0.25;
   display: none;
 }
 
 .signin_member {
-  font-family: "Noto Sans TC";
-  color: #666666;
-  border-radius: 5px;
-  background: #ffffff;
-  width: 340px;
-  height: auto;
   position: relative;
+  display: none;
+  width: 340px;
   margin: 20px auto;
+  height: auto;
+  background: #ffffff;
+  border-radius: 5px;
+  color: #666666;
+  font-family: "Noto Sans TC";
   display: flex;
   flex-direction: column;
   animation: move 1s;
-  display: none;
 }
 
 .member_title {
   display: flex;
   justify-content: center;
   margin: 10px;
-  font-size: 24px;
   padding-top: 10px;
+  font-size: 24px;
 }
 
 #close {
+  position: absolute;
   top: 10px;
   right: 15px;
-  position: absolute;
   cursor: pointer;
   color: #666666;
   opacity: 0.45;
@@ -57,10 +57,10 @@
   width: 90%;
   height: 47px;
   margin: 8px;
-  border: 1px solid #cccccc;
-  box-sizing: border-box;
-  border-radius: 5px;
   padding-left: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .member form > button {
@@ -81,17 +81,17 @@
 }
 
 .signup_member {
-  font-family: "Noto Sans TC";
-  color: #666666;
-  border-radius: 5px;
-  background: #ffffff;
-  width: 340px;
-  height: auto;
   position: relative;
+  display: none;
+  width: 340px;
   margin: 20px auto;
+  height: auto;
+  background: #ffffff;
+  border-radius: 5px;
+  color: #666666;
+  font-family: "Noto Sans TC";
   display: flex;
   flex-direction: column;
-  display: none;
 }
 
 span#towardsign_in {

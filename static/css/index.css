@@ -6,9 +6,9 @@
 }
 
 body {
-  height: 100vh;
   display: grid;
   grid-template-rows: 54px 1fr;
+  height: 100vh;
 }
 
 .body {
@@ -21,9 +21,9 @@ body {
 .header {
   display: flex;
   margin: auto;
-  background: #ffffff;
   height: 54px;
   max-width: 1200px;
+  background: #ffffff;
 }
 
 .header a {
@@ -31,42 +31,43 @@ body {
 }
 
 .title {
+  margin: 10px 0px 10px 10px;
   font-size: 30px;
   font-weight: bold;
-  color: #448899;
-  font-family: "Noto Sans TC";
   line-height: 34px;
-  margin: 10px 0px 10px 10px;
+  font-family: "Noto Sans TC";
+  color: #448899;
 }
 
 .items {
-  font-size: 16px;
-  color: #666666;
-  font-family: "Noto Sans TC";
   width: 64px;
+  font-size: 16px;
+  font-family: "Noto Sans TC";
+  color: #666666;
 }
 
 .sec2 button {
-  background: #448899;
   position: relative;
-  border-radius: 0px 7px 7px 0px;
   top: 7px;
   left: -5px;
-  border: 0;
   width: 46px;
   height: 46px;
+  border: 0;
+  border-radius: 0px 7px 7px 0px;
+  background: #448899;
 }
+
 .sec2 input {
   width: 400px;
   height: 46px;
   margin-top: 100px;
-  font-family: "Noto Sans TC";
+  padding-left: 10px;
+  border: 0;
+  border-radius: 7px 0px 0px 7px;
   font-size: 16px;
   font-weight: bold;
+  font-family: "Noto Sans TC";
   color: #757575;
-  border-radius: 7px 0px 0px 7px;
-  border: 0;
-  padding-left: 10px;
 }
 
 #schedule {
@@ -77,45 +78,42 @@ body {
 
 #sign {
   width: 82px;
-  text-align: center;
   margin: 15px 40px 10px -30px;
+  text-align: center;
   display: block;
 }
 
 #signout {
   width: 82px;
-  margin: auto 10px;
-  text-align: center;
   margin: auto 10px auto -30px;
+  text-align: center;
   display: none;
 }
 
 nav {
-  height: 320px;
-  background: url("/static/header.png"),
-    linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
-  background-size: auto auto;
-  background-repeat: no-repeat;
   display: grid;
-  background-position: 90%, 100%;
-  grid-template-columns: 1fr 1200px 1fr;
+  height: 320px;
+  margin-top: 52px;
   overflow: auto;
   overflow-x: hidden;
-  margin-top: 52px;
+  grid-template-columns: 1fr 1200px 1fr;
+  background: url("/static/header.png"), linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
+  background-size: auto auto;
+  background-repeat: no-repeat;
+  background-position: 90%, 100%;
 }
 
 .sec2-1 {
   position: relative;
   left: 0px;
   top: 80px;
-  font-family: "Noto Sans TC";
-  font-style: normal;
-  font-weight: bold;
+  padding: 5px;
   font-size: 28px;
+  font-weight: bold;
   line-height: 24px;
+  font-family: "Noto Sans TC";
   color: #f8f8f8;
   text-shadow: 0px 0px 30px #aabbcc;
-  padding: 5px;
 }
 
 .sec2-2 {
@@ -123,10 +121,10 @@ nav {
   left: 0px;
   top: 80px;
   padding: 8px;
-  font-family: "Noto Sans TC";
-  color: #f8f8f8;
   font-size: 16px;
   line-height: 13px;
+  font-family: "Noto Sans TC";
+  color: #f8f8f8;
 }
 
 #container {
@@ -136,9 +134,10 @@ nav {
   justify-content: center;
   align-items: center;
   margin: auto;
-  max-width: 1200px;
   margin-top: 340px;
+  max-width: 1200px;
 }
+
 #container a {
   flex: none;
   width: 270px;
@@ -158,15 +157,16 @@ nav {
 
 #categoryname {
   margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
   font-family: "Noto Sans TC";
   color: Gray;
-  font-weight: bold;
-  font-size: 16px;
 }
 
 p.letters {
   word-wrap: break-word;
 }
+
 #mrttitle {
   flex: none;
   margin-left: 10px;
@@ -183,23 +183,22 @@ p.letters {
 
 #image {
   flex: none;
-  font-weight: bold;
   width: 100%;
-  background-color: #f0f8ff;
+  font-weight: bold;
   text-align: center;
+  background-color: #f0f8ff;
   aspect-ratio: 16/9;
   object-fit: cover;
   border-radius: 7px 7px 0px 0px;
 }
 
 footer {
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
+  line-height: 60px;
   text-align: center;
   background: #757575;
   font-family: "Noto Sans TC";
-  text-align: center;
-  line-height: 60px;
 }
 
 #container a:hover {
@@ -223,6 +222,7 @@ footer {
   form {
     padding: 8px;
   }
+
   nav {
     background-size: 65%, 100%;
     background-position: right bottom;
