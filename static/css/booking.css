@@ -1,26 +1,25 @@
 .booking_main {
   margin-top: 72px;
-  font-family: "Noto Sans TC";
-  color: #666666;
   margin-right: auto;
   margin-left: auto;
-  max-width: 1200px;
-  width: 100%;
   padding-left: 100px;
   padding-right: 100px;
+  max-width: 1200px;
+  width: 100%;
+  font-family: "Noto Sans TC";
+  color: #666666;
 }
 
 #booking_signout {
   width: 82px;
-  margin: auto 10px;
-  text-align: center;
   margin: auto 10px auto -30px;
+  text-align: center;
 }
 
 .booking_name {
+  margin-bottom: 20px;
   font-size: 19px;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 
 div.bookinfo {
@@ -32,10 +31,12 @@ div.bookinfo {
   display: flex;
   max-width: 1200px;
 }
+
 .booking_img_container {
   width: 350px;
   height: 200px;
 }
+
 #booking_img {
   flex: none;
   width: 100%;
@@ -51,17 +52,18 @@ div.bookinfo {
 }
 
 .div_name {
-  font-weight: bold;
-  font-size: 16px;
-  color: #448899;
   margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #448899;
 }
 
 .div_text {
-  font-weight: bold;
-  font-size: 16px;
   margin: 10px auto;
+  font-size: 16px;
+  font-weight: bold;
 }
+
 span {
   font-weight: 100;
 }
@@ -71,36 +73,36 @@ span {
 }
 
 #order_title {
-  font-weight: bold;
-  font-size: 19px;
   margin-bottom: 25px;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .order_info input {
   width: 180px;
+  height: 25px;
+  padding-left: 5px;
   background: #ffffff;
   border: 1px solid #e8e8e8;
   box-sizing: border-box;
   border-radius: 5px;
-  height: 25px;
-  padding-left: 5px;
 }
 
 .tpfield {
   width: 180px;
-  background: #ffffff;
-  border: 1px solid #e8e8e8;
-  border-radius: 5px;
   height: 27px;
   padding-left: 5px;
   display: inline-block;
   vertical-align: middle;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
 }
 
 .order_info label {
-  font-weight: 400;
-  font-size: 16px;
   line-height: 27px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .order_input {
@@ -108,8 +110,8 @@ span {
 }
 
 .remind {
-  font-weight: bold;
   margin: 20px auto 30px auto;
+  font-weight: bold;
 }
 
 .send_booking * {
@@ -124,12 +126,12 @@ span {
 
 .send_booking button {
   display: block;
-  background: #448899;
-  border-radius: 5px;
   padding: 8px 10px;
+  background: #448899;
+  border: none;
+  border-radius: 5px;
   color: #ffffff;
   font-size: 16px;
-  border: none;
   cursor: pointer;
 }
 
@@ -142,24 +144,27 @@ span {
   border: 2px solid;
   border-color: #66afe9;
 }
+
 .has-error .tappay-field-focus {
   border: 2px solid #843534;
 }
+
 .has-success .tappay-field-focus {
   border: 2px solid #4fba51;
 }
 
 h2 {
-  text-align: center;
   margin-top: 50px;
+  text-align: center;
 }
 
 #order_number {
+  margin-bottom: 20px;
   font-family: "Noto Sans TC";
   font-size: bold;
   color: #126d9a;
-  margin-bottom: 20px;
 }
+
 @media (max-width: 1200px) {
   .booking_main {
     padding-left: 50px;
@@ -170,6 +175,7 @@ h2 {
     width: 100%;
     margin: auto;
   }
+
   div.booking {
     margin-right: auto;
     margin-left: auto;

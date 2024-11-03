@@ -6,12 +6,14 @@
 }
 
 body {
-  height: 100vh;
   display: grid;
+  height: 100vh;
 }
+
 .body {
-  z-index: 1;
   position: fixed;
+  z-index: 1;
+  display: flex;
   justify-content: center;
   width: 100%;
   background-color: white;
@@ -20,9 +22,9 @@ body {
 .header {
   display: flex;
   margin: auto;
-  background: #ffffff;
   height: 54px;
   max-width: 1200px;
+  background: #ffffff;
 }
 
 .header a {
@@ -30,19 +32,19 @@ body {
 }
 
 .title {
+  margin: 10px 0px 10px 10px;
   font-size: 30px;
   font-weight: bold;
-  color: #448899;
   font-family: "Noto Sans TC";
+  color: #448899;
   line-height: 34px;
-  margin: 10px 0px 10px 10px;
 }
 
 .items {
-  font-size: 16px;
-  color: #666666;
-  font-family: "Noto Sans TC";
   width: 64px;
+  font-size: 16px;
+  font-family: "Noto Sans TC";
+  color: #666666;
 }
 
 #schedule {
@@ -53,25 +55,24 @@ body {
 
 #sign {
   width: 82px;
-  text-align: center;
   margin: 15px 40px 10px -30px;
   display: block;
+  text-align: center;
 }
 
 #signout {
   width: 82px;
-  margin: auto 10px;
-  text-align: center;
   margin: auto 10px auto -30px;
   display: none;
+  text-align: center;
 }
 
 .main_info {
   display: flex;
-  max-width: 1200px;
+  justify-content: space-between;
   margin: 54px auto 10px;
   padding: 0 10px;
-  justify-content: space-between;
+  max-width: 1200px;
 }
 
 /* 圖片框 */
@@ -93,13 +94,14 @@ img.img {
   object-fit: cover;
   border-radius: 6px;
 }
+
 div.arrow {
   display: flex;
   justify-content: space-between;
   position: absolute;
   top: 50%;
-  height: 36px;
   width: 99%;
+  height: 36px;
   align-items: center;
 }
 
@@ -108,19 +110,20 @@ div#dot__nav {
   justify-content: center;
   position: absolute;
   top: 90%;
-  height: 15px;
   width: 100%;
+  height: 15px;
 }
 
 span.dot {
-  border: 0px;
-  border-radius: 50%;
   width: 12px;
   height: 12px;
-  background: white;
   margin: 0 8px;
   cursor: pointer;
+  border: 0px;
+  border-radius: 50%;
+  background: white;
 }
+
 span.active,
 span.dot:hover {
   background: black;
@@ -129,8 +132,8 @@ span.dot:hover {
 
 div.left_arrow,
 div.right_arrow {
-  height: 36px;
   width: 36px;
+  height: 36px;
   opacity: 0.7;
 }
 
@@ -157,14 +160,10 @@ div#location {
 
 /* 行程表單 */
 .booking {
-  height: 380px;
   width: 600px;
+  height: 380px;
 }
 
-.booking_form > * {
-  margin: 15px;
-  font-family: "Noto Sans TC";
-}
 .booking_form {
   width: 100%;
   padding: 10px 20px;
@@ -172,17 +171,24 @@ div#location {
   border-radius: 5px;
   color: #666666;
 }
-#name {
-  font-weight: bold;
-  font-size: 24px;
+
+.booking_form > * {
+  margin: 15px;
+  font-family: "Noto Sans TC";
 }
+
+#name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 #location {
   font-size: 16px;
 }
 
 .bold {
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .booking_form p {
@@ -194,10 +200,10 @@ div#location {
 }
 
 .booking_form .date input {
-  border: none;
-  padding: 5px 10px;
-  height: 35px;
   width: auto;
+  height: 35px;
+  padding: 5px 10px;
+  border: none;
 }
 
 .booking_form .time label:first-child {
@@ -205,14 +211,15 @@ div#location {
 }
 
 .booking_form .time input {
-  appearance: none;
   width: 20px;
   height: 20px;
   background: #ffffff;
   border: 3px solid #ffffff;
   border-radius: 50%;
+  appearance: none;
   transform: translateY(4px);
 }
+
 .booking_form .time input:checked {
   background: #448899;
 }
@@ -234,22 +241,24 @@ div#location {
 
 .separate_line {
   width: auto;
+  margin: auto auto;
   max-width: 1200px;
   border: 1px solid #e8e8e8;
-  margin: auto auto;
 }
 
 /* 景點描述 */
 .info {
-  max-width: 1200px;
   margin: 20px auto auto auto;
   padding: 10px;
-  font-family: "Noto Sans";
+  max-width: 1200px;
   font-size: 16px;
+  font-family: "Noto Sans";
 }
+
 .info > * {
   margin-bottom: 20px;
 }
+
 .address_title {
   font-weight: bold;
 }
@@ -263,16 +272,15 @@ div#location {
 }
 
 footer {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  background: #757575;
-  font-family: "Noto Sans TC";
-  text-align: center;
-  line-height: 60px;
   position: fixed;
   bottom: 0px;
   width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background: #757575;
+  font-family: "Noto Sans TC";
+  line-height: 60px;
 }
 
 @media (max-width: 1200px) {
@@ -282,9 +290,10 @@ footer {
 
   .main_info {
     flex-wrap: wrap;
-    padding: 0;
     justify-content: center;
+    padding: 0;
   }
+
   .img_container {
     width: 80%;
   }
@@ -294,14 +303,16 @@ footer {
   }
 
   .booking {
-    margin-top: 20px;
     width: 80%;
+    margin-top: 20px;
     padding: 10px;
   }
+
   .separate_line {
     width: 90%;
   }
 }
+
 @media (max-width: 600px) {
   .img_container {
     width: 100%;
@@ -312,10 +323,11 @@ footer {
   }
 
   .booking {
-    margin-top: 20px;
     width: 100%;
+    margin-top: 20px;
     padding: 10px;
   }
+
   .separate_line {
     width: 95%;
   }
