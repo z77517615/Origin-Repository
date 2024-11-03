@@ -1,80 +1,92 @@
-const fee = document.querySelector("#fee");
-const morning = document.querySelector('input[value="morning"]');
-const afternoon = document.querySelector('input[value="afternoon"]');
+document.addEventListener("DOMContentLoaded", () => {
+  const fee = document.querySelector("#fee");
+  const morning = document.querySelector('input[value="morning"]');
+  const afternoon = document.querySelector('input[value="afternoon"]');
+  const slideIndex = 1;
 
-morning.addEventListener("click", () => {
-  fee.innerText = 2000;
-});
-afternoon.addEventListener("click", () => {
-  fee.innerText = 2500;
-});
+  morning.addEventListener("click", () => {
+    fee.innerText = 2000;
+  });
 
-window.addEventListener("load", () => {
-  let array = location.href.split("/");
-  let id = array[4];
-  URL = `/api/attraction/${id}`;
-  fetch(URL)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let name = data["data"]["name"];
-      let attr_loc =
-        data["data"]["category"] + " at " + data["data"]["mrt"] + "站";
-      let description = data["data"]["description"];
-      let address = data["data"]["address"];
-      let transport = data["data"]["transport"];
-      let imgURLs = data["data"]["images"];
+  afternoon.addEventListener("click", () => {
+    fee.innerText = 2500;
+  });
 
-      document.getElementById("name").innerHTML = name;
-      document.getElementById("location").innerHTML = attr_loc;
-      document.getElementById("description").innerHTML = description;
-      document.getElementById("address").innerHTML = address;
-      document.getElementById("transport").innerHTML = transport;
+  const fetchAttractionData = async (id) => {
+    try {
+      const response = await fetch(`/api/attraction/${id}`);
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      console.error("Error fetching attraction data:", error);
+    }
+  };
 
-      for (i = 0; i <= imgURLs.length - 1; i++) {
-        let j = i + 1;
-        let image = document.createElement("img");
-        let div = document.createElement("div");
-        let dot = document.createElement("span");
-        image.src = imgURLs[i];
-        div.appendChild(image);
-        dot__nav.append(dot);
-        images.append(div);
-        div.setAttribute("class", "mySlides");
-        image.setAttribute("class", "img");
-        dot.setAttribute("class", "dot");
-        dot.setAttribute("onclick", `btm_slide(${j})`);
-      }
-      showSlides(slideIndex);
+  const updateAttractionDetails = (data) => {
+    document.getElementById("name").innerText = data.name;
+    document.getElementById("location").innerText = `${data.category} at ${data.mrt}站`;
+    document.getElementById("description").innerText = data.description;
+    document.getElementById("address").innerText = data.address;
+    document.getElementById("transport").innerText = data.transport;
+  };
+
+  const createImageElements = (imgURLs) => {
+    const imagesContainer = document.getElementById("images");
+    const dotNav = document.getElementById("dot__nav");
+
+    imgURLs.forEach((url, index) => {
+      const image = document.createElement("img");
+      const div = document.createElement("div");
+      const dot = document.createElement("span");
+
+      image.src = url;
+      div.appendChild(image);
+      dotNav.appendChild(dot);
+      imagesContainer.appendChild(div);
+
+      div.classList.add("mySlides");
+      image.classList.add("img");
+      dot.classList.add("dot");
+      dot.setAttribute("onclick", `btm_slide(${index + 1})`);
     });
+  };
+
+  const initializeSlides = () => {
+    const slides = document.getElementsByClassName("mySlides");
+    const dots = document.getElementsByClassName("dot");
+
+    const showSlides = (n) => {
+      let slideIndex = n;
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      Array.from(slides).forEach((slide) => (slide.style.display = "none"));
+      Array.from(dots).forEach((dot) => dot.classList.remove("active"));
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].classList.add("active");
+    };
+
+    const sideSlide = (n) => showSlides((slideIndex += n));
+    const btmSlide = (n) => showSlides((slideIndex = n));
+
+    window.side_slide = sideSlide;
+    window.btm_slide = btmSlide;
+
+    showSlides(slideIndex);
+  };
+
+  const init = async () => {
+    const urlSegments = location.href.split("/");
+    const id = urlSegments[4];
+    const data = await fetchAttractionData(id);
+
+    if (data) {
+      updateAttractionDetails(data);
+      createImageElements(data.images);
+      initializeSlides();
+    }
+  };
+
+  init();
 });
-let slides = document.getElementsByClassName("mySlides");
-let slideIndex = 1;
-function showSlides(n) {
-  var i;
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace("active", "");
-  }
-
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " active";
-}
-
-function side_slide(n) {
-  showSlides((slideIndex += n));
-}
-
-function btm_slide(n) {
-  showSlides((slideIndex = n));
-}

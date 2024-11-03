@@ -1,64 +1,70 @@
 const sign = document.getElementById("sign");
 const signout = document.getElementById("signout");
-const background_color = document.querySelector(".background_color");
-const signin_member = document.querySelector(".signin_member");
-const signup_member = document.querySelector(".signup_member");
+const backgroundColor = document.querySelector(".background_color");
+const signinMember = document.querySelector(".signin_member");
+const signupMember = document.querySelector(".signup_member");
 const signinForm = document.querySelector("#signin");
 const signupForm = document.querySelector("#signup");
 const message = document.querySelector(".message");
+const schedule = document.getElementById("schedule");
+const bookingForm = document.querySelector(".booking_form");
 
-//切換選單出現
-function showsign_in() {
-  background_color.style.display = "block";
-  signin_member.style.display = "block";
-}
+const toggleDisplay = (element, displayStyle) => {
+  element.style.display = displayStyle;
+};
 
-function closesign_in() {
-  background_color.style.display = "none";
-  signin_member.style.display = "none";
-}
+const showSignIn = () => {
+  toggleDisplay(backgroundColor, "block");
+  toggleDisplay(signinMember, "block");
+};
 
-function closesign_up() {
-  background_color.style.display = "none";
-  signup_member.style.display = "none";
-}
+const closeSignIn = () => {
+  toggleDisplay(backgroundColor, "none");
+  toggleDisplay(signinMember, "none");
+};
 
-function towardsign_up() {
-  signup_member.style.display = "block";
-  background_color.style.display = "block";
-  signin_member.style.display = "none";
-}
+const closeSignUp = () => {
+  toggleDisplay(backgroundColor, "none");
+  toggleDisplay(signupMember, "none");
+};
 
-function towardsign_in() {
-  signup_member.style.display = "none";
-  background_color.style.display = "block";
-  signin_member.style.display = "block";
-}
+const switchToSignUp = () => {
+  toggleDisplay(signupMember, "block");
+  toggleDisplay(backgroundColor, "block");
+  toggleDisplay(signinMember, "none");
+};
 
-function closesign() {
-  signup_member.style.display = "none";
-  background_color.style.display = "none";
-  signin_member.style.display = "none";
-}
+const switchToSignIn = () => {
+  toggleDisplay(signupMember, "none");
+  toggleDisplay(backgroundColor, "block");
+  toggleDisplay(signinMember, "block");
+};
 
-function signout_toggle() {
-  sign.style.display = "none";
-  signout.style.display = "block";
-}
+const closeSign = () => {
+  toggleDisplay(signupMember, "none");
+  toggleDisplay(backgroundColor, "none");
+  toggleDisplay(signinMember, "none");
+};
 
-function signin_toggle() {
-  sign.style.display = "block";
-  signout.style.display = "none";
-}
+const signoutToggle = () => {
+  toggleDisplay(sign, "none");
+  toggleDisplay(signout, "block");
+};
 
-//登入
-signinForm.addEventListener("submit", signin);
-function signin(e) {
+const signinToggle = () => {
+  toggleDisplay(sign, "block");
+  toggleDisplay(signout, "none");
+};
+
+const handleResponse = (response) => response.json();
+
+const handleSignin = (e) => {
   e.preventDefault();
-  let data = {
-    email: this.querySelector('input[name="email"]').value,
-    password: this.querySelector('input[name="password"]').value,
+  const data = {
+    email: e.target.querySelector('input[name="email"]').value,
+    password: e.target.querySelector('input[name="password"]').value,
   };
+
   fetch(`/api/user`, {
     method: "PATCH",
     body: JSON.stringify(data),
@@ -66,27 +72,26 @@ function signin(e) {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => response.json())
+    .then(handleResponse)
     .then((data) => {
-      if (data["ok"] == true) {
-        signout_toggle();
-        closesign();
+      if (data.ok) {
+        signoutToggle();
+        closeSign();
         window.location.reload();
       } else {
-        message.innerText = data["message"];
+        message.innerText = data.message;
       }
     });
-}
+};
 
-//註冊
-signupForm.addEventListener("submit", signup);
-function signup(e) {
+const handleSignup = (e) => {
   e.preventDefault();
-  let data = {
-    name: this.querySelector('input[name="name"]').value,
-    email: this.querySelector('input[name="email"]').value,
-    password: this.querySelector('input[name="password"]').value,
+  const data = {
+    name: e.target.querySelector('input[name="name"]').value,
+    email: e.target.querySelector('input[name="email"]').value,
+    password: e.target.querySelector('input[name="password"]').value,
   };
+
   fetch(`/api/user`, {
     method: "POST",
     body: JSON.stringify(data),
@@ -94,94 +99,71 @@ function signup(e) {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => response.json())
+    .then(handleResponse)
     .then((data) => {
-      let message = this.querySelector(".message");
-      if (data["ok"] == true) {
-        message.innerText = "註冊成功";
-      } else {
-        message.innerText = data["message"];
-      }
+      const messageElement = e.target.querySelector(".message");
+      messageElement.innerText = data.ok ? "註冊成功" : data.message;
     });
-}
+};
 
-//取得資訊
-function get_userdata() {
-  fetch(`/api/user`, {
-    method: "GET",
-  })
-    .then((response) => response.json())
+const getUserData = () => {
+  fetch(`/api/user`, { method: "GET" })
+    .then(handleResponse)
     .then((data) => {
-      if (data.data == null) {
-        signin_toggle();
-      } else {
-        signout_toggle();
-      }
+      data.data ? signoutToggle() : signinToggle();
     });
-}
-get_userdata();
+};
 
-//登出
-function sign_out() {
-  fetch(`/api/user`, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
+const signOut = () => {
+  fetch(`/api/user`, { method: "DELETE" })
+    .then(handleResponse)
+    .then(() => {
+      signinToggle();
+      window.location.reload();
+    });
+};
+
+const handleScheduleClick = () => {
+  fetch("/api/user", { method: "GET" })
+    .then(handleResponse)
     .then((data) => {
-      if (data) {
-        signin_toggle();
-        window.location.reload();
-      }
+      data.data ? (window.location.href = "/booking") : switchToSignIn();
     });
-}
+};
 
-//按預定行程
-const schedule = document.getElementById("schedule");
-schedule.addEventListener("click", () => {
-  fetch("/api/user", {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.data !== null) {
-        window.location.href = "/booking";
-      } else {
-        towardsign_in();
-      }
-    });
-});
-
-const bookingForm = document.querySelector(".booking_form");
-
-//取得行程資料
-bookingForm.addEventListener("submit", booking);
-function booking(e) {
+const handleBooking = (e) => {
   e.preventDefault();
-  fetch(`/api/user`, {
-    method: "GET",
-  })
-    .then((response) => response.json())
+  fetch(`/api/user`, { method: "GET" })
+    .then(handleResponse)
     .then((data) => {
-      if (data.data !== null) {
-        let booking_info = {
+      if (data.data) {
+        const bookingInfo = {
           AttractionID: location.pathname.split("/")[2],
-          date: this.querySelector('input[name="date"]').value,
-          time: this.querySelector('input[name="time"]').value,
-          fee: this.querySelector("#fee").innerText,
+          date: e.target.querySelector('input[name="date"]').value,
+          time: e.target.querySelector('input[name="time"]').value,
+          fee: e.target.querySelector("#fee").innerText,
         };
+
         fetch(`/api/booking`, {
           method: "POST",
-          body: JSON.stringify(booking_info),
+          body: JSON.stringify(bookingInfo),
           headers: {
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json())
-          .then((data) => {
+          .then(handleResponse)
+          .then(() => {
             window.location.href = "/booking";
           });
       } else {
-        towardsign_in();
+        switchToSignIn();
       }
     });
-}
+};
+
+signinForm.addEventListener("submit", handleSignin);
+signupForm.addEventListener("submit", handleSignup);
+schedule.addEventListener("click", handleScheduleClick);
+bookingForm.addEventListener("submit", handleBooking);
+
+getUserData();
