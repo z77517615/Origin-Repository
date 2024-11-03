@@ -9,164 +9,106 @@ from decouple import config
 Attraction = Blueprint('Attraction', __name__)
 
 load_dotenv()
-cnxpool=pooling.MySQLConnectionPool(pool_name="mypool",
-                                    pool_size=10,
-                                    host=os.getenv("host"),
-                                    password=os.getenv("password"),
-                                    user=os.getenv("user"),
-                                    database=os.getenv("database"),
-                                    pool_reset_session=True
-                                             )
+cnxpool = pooling.MySQLConnectionPool(
+    pool_name="mypool",
+    pool_size=10,
+    host=os.getenv("host"),
+    password=os.getenv("password"),
+    user=os.getenv("user"),
+    database=os.getenv("database"),
+    pool_reset_session=True
+)
 
-
+def get_attractions(page_index, keyword=""):
+    cnx = cnxpool.get_connection()
+    myCursor = cnx.cursor()
+    try:
+        if keyword:
+            sql = "SELECT * FROM attraction WHERE name LIKE %s LIMIT 12 OFFSET %s"
+            myCursor.execute(sql, (f"%{keyword}%", page_index))
+        else:
+            sql = "SELECT * FROM attraction LIMIT 12 OFFSET %s"
+            myCursor.execute(sql, (page_index,))
+        records = myCursor.fetchall()
+        return records
+    finally:
+        myCursor.close()
+        cnx.close()
 
 @Attraction.route('/attractions')
 def api_attractions():
-    def select(page_index, keyword=""):      
-        if keyword =="":
-            sql= f"select * from attraction limit 12 offset {page_index}"
-            mycursor.execute(sql)
-            records=mycursor.fetchall()
-            return records
+    try:
+        page = int(request.args.get('page', 0))
+        page_index = page * 12
+        next_page = page + 1
+        keyword = request.args.get('keyword', "")
 
+        records = get_attractions(page_index, keyword)
+        results = []
+        for record in records:
+            output = ast.literal_eval(record[9])
+            result = {
+                "id": record[0],
+                "name": record[1],
+                "category": record[2],
+                "description": record[3],
+                "address": record[4],
+                "transport": record[5],
+                "mrt": record[6],
+                "latitude": record[7],
+                "longitude": record[8],
+                "images": output
+            }
+            results.append(result)
 
+        data = {
+            "next_page": next_page if results else "null",
+            "data": results
+        }
+        return jsonify(data)
+
+    except Exception as e:
+        return {
+            "error": True,
+            "message": "自訂的錯誤訊息"
+        }, 500
+
+@Attraction.route('/attraction/<int:variable>')
+def attraction(variable):
+    cnx = cnxpool.get_connection()
+    myCursor = cnx.cursor()
+    try:
+        sql = "SELECT * FROM attraction WHERE id = %s"
+        myCursor.execute(sql, (variable,))
+        record = myCursor.fetchone()
+        if record:
+            output = ast.literal_eval(record[9])
+            result = {
+                "id": record[0],
+                "name": record[1],
+                "category": record[2],
+                "description": record[3],
+                "address": record[4],
+                "transport": record[5],
+                "mrt": record[6],
+                "latitude": record[7],
+                "longitude": record[8],
+                "images": output
+            }
+            data = {"data": result}
+            return jsonify(data)
         else:
-            sql= f"select * from attraction where name like ('%{keyword}%') limit 12 offset {page_index}"
-            mycursor.execute(sql)
-            records=mycursor.fetchall()
-            return records        
-    
-    try:
-        cnx=cnxpool.get_connection()
-        mycursor=cnx.cursor()
-        if request.args.get('page'):
-            page = int(request.args.get('page'))
-            page_index = page * 12
-            next_page = page + 1
+            return {
+                "error": True,
+                "message": "Attraction not found"
+            }, 404
 
-            if request.args.get('keyword'):
-                keyword =request.args.get('keyword')
-                records=select(page_index,keyword)
-                results=[]
-                for i in range(0,len(records)):
-                    str=records[i][9]
-                    output=ast.literal_eval(str)
-                    result={
-                        "id": records[i][0],
-                        "name":records[i][1],
-                        "category":records[i][2],
-                        "description": records[i][3],
-                        "address":records[i][4],
-                        "transport": records[i][5],
-                        "mrt": records[i][6],
-                        "latitude": records[i][7],
-                        "longitude": records[i][8],
-                        "images":output
-                    }  
-                    results.append(result)
-                if results == []:       
-                    data={
-                        "next_page": "null",
-                        "data":results
-                        }                    
-                    response=make_response(data, {"content-type":"application/json"})   
-                    mycursor.close() 
-                    cnx.close()    
-                    return response
-                else:
-                    data= {
-                    "next_page": next_page,
-                    "data":results
-                    }
-                    response=make_response(data, {"content-type":"application/json"})   
-                    return response
-
-            else:
-                records=select(page_index)
-                results=[]
-                for i in range(0,len(records)):
-                    str=records[i][9]
-                    output=ast.literal_eval(str)
-                    result={
-                        "id": records[i][0],
-                        "name":records[i][1],
-                        "category":records[i][2],
-                        "description": records[i][3],
-                        "address":records[i][4],
-                        "transport": records[i][5],
-                        "mrt": records[i][6],
-                        "latitude": records[i][7],
-                        "longitude": records[i][8],
-                        "images":output
-                    }  
-                    results.append(result)
-                if results == []:  
-                    data={
-                        "next_page": "null",
-                        "data":results
-                        }      
-                    response=make_response(data, {"content-type":"application/json"})   
-                    return response
-                else:
-                    data={
-                        "next_page": next_page,
-                        "data":results
-                        }   
-                    response=make_response(data, {"content-type":"application/json"})
-                    return response
-    
-    except:
-        cnx.rollback()
+    except Exception as e:
         return {
-        "error": True,
-        "message": "自訂的錯誤訊息"
-        },500
-    
-    finally:
-        mycursor.close() 
-        cnx.close()
-
-
-@Attraction.route('/attraction/<variable>')
-def attration(variable):
-    cnx=cnxpool.get_connection()
-    mycursor=cnx.cursor()
-    try:
-        if variable: 
-            sql= f"select * from attraction where id = {variable}"
-            mycursor.execute(sql)
-            records=mycursor.fetchone()
-            str=records[9]
-            output=ast.literal_eval(str)
-            results={
-                "id": records[0],
-                "name":records[1],
-                "category":records[2],
-                "description": records[3],
-                "address":records[4],
-                "transport": records[5],
-                "mrt": records[6],
-                "latitude": records[7],
-                "longitude": records[8],
-                "images":output
-            }  
-            data={
-                      "data":results
-                    }   
-            response=make_response(data,  {"content-type":"application/json"})
-            return response
-      
-            
-    except:
-        cnx.rollback()
-        return {
-        "error": True,
-        "message": "伺服器內部錯誤"
+            "error": True,
+            "message": "伺服器內部錯誤"
         }, 500
 
     finally:
-        mycursor.close() 
+        myCursor.close()
         cnx.close()
-
-
-
